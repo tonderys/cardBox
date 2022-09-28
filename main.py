@@ -1,31 +1,25 @@
 from solid import *
 from solid.utils import *
 
+from Empty_box import Empty_box
+
 def move_to_center_top(delta):
     return translate((delta,
                       delta,
                       delta))
 
-class Empty_box(OpenSCADObject):
-    def __init__(self, width, height, depth, wall_thickness):
-        self.wall_thickness = wall_thickness
-        self.outer = cube([width + (2 * wall_thickness),
-                           height + (2 * wall_thickness),
-                           depth + (2 * wall_thickness)])
-        self.inner = move_to_center_top(wall_thickness)(cube([width, height, depth + wall_thickness]))
-
-    def get(self):
-        return difference()(self.outer, self.inner)
-
 class Card_holder(OpenSCADObject):
-    def __init__(self, width, height, depth, wall_thickness):
+    def __init__(self, width, height, depth):
         radius = 10
 
-        hole = forward(height / 2)(cylinder(h=depth + 2 * wall_thickness, r=radius))
-        self.box = Empty_box(width, height, depth, wall_thickness).get()
+        self.box = Empty_box(width, height, depth).get()
+        hole = forward(height / 2)(cylinder(h=depth + (2 * self.box.walls_thickness.y), r=radius))
         self.holes = [hole, right(width + (2*wall_thickness))(hole)]
 
-        roof = (move_to_center_top(wall_thickness)(up(depth)(cube([width,height, wall_thickness]))))
+        roof = (translate((self.box.walls_thickness.x,
+                           self.box.walls_thickness.y,
+                           self.box.walls_thickness.z))
+                (up(depth)(cube([width,height, wall_thickness]))))
         flaps = union()([intersection()(self.box, hole) for hole in self.holes])
         flaps = difference()(flaps, down(depth + wall_thickness)(roof))
 
@@ -55,8 +49,19 @@ class Card_holder(OpenSCADObject):
 
 class Joint:
     def __init__(self, h):
-        self.body = polyhedron(points=[[0,0,0],[2,0,0],[3,1,0],[-1,1,0],[0,0,h],[2,0,h],[3,1,h],[-1,1,h]],
-                               faces =[[0,1,2,3],[4,5,1,0],[5,6,2,1],[6,7,3,2], [7,4,0,3],[7,6,5,4]])
+        gap = 0.2
+        bottom_width = 2
+        delta = 1
+        trapeze_height = 1
+        self.body = polyhedron(points=[[0,0,0],
+                                       [bottom_width - (gap / 2),0,0],
+                                       [bottom_width + delta - (gap / 2),trapeze_height,0],
+                                       [-delta,trapeze_height,0],
+                                       [0,0,h],
+                                       [bottom_width - (gap / 2),0,h],
+                                       [bottom_width + delta - (gap / 2),trapeze_height,h],
+                                       [-delta,trapeze_height,h]],
+                               faces =[[0,1,2,3],[4,5,1,0],[5,6,2,1],[6,7,3,2],[7,4,0,3],[7,6,5,4]])
     def get(self):
         return self.body
 
@@ -64,9 +69,8 @@ def main():
     width = 63
     height = 88
     depth = 20
-    wall_thickness = 5
 
-    object = Card_holder(width, height, depth, wall_thickness)
+    object = Card_holder(width, height, depth)
 
     scad_render_to_file(object.get_top(), f"top_{width}x{height}mm.scad")
     scad_render_to_file(object.get_bottom(), f"bottom_{width}x{height}mm.scad")
