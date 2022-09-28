@@ -3,11 +3,6 @@ from solid.utils import *
 
 from Empty_box import Empty_box
 
-def move_to_center_top(delta):
-    return translate((delta,
-                      delta,
-                      delta))
-
 class Card_holder(OpenSCADObject):
     def __init__(self, width, height, depth):
         radius = 10
