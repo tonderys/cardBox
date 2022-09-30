@@ -9,8 +9,8 @@ class WithJoints:
         self.box = box
         self.notch = Notch(self.box.outer.depth)
         self._adjust_walls()
-        self.joints = [self._get_upper_joints(), self._get_right_joints(), self._get_lower_joints(),
-                       self._get_left_joints()]
+        self.joints = [self._get_upper_joints(), self._get_right_joints(),
+                       self._get_lower_joints(), self._get_left_joints()]
 
     def _get_joints(self, length):
         assert((length + self.notch.delta) % self.notch.get_interlocked_length() == 0)
@@ -38,7 +38,7 @@ class WithJoints:
 
     def _get_delta(self, length):
         mod = length % self.notch.get_interlocked_length()
-        if mod == 0: return 0
+        if mod == self.notch.get_interlocked_length() - self.notch.delta: return 0
         delta = self.notch.get_interlocked_length() - mod - self.notch.delta
         return delta if delta > 0 else delta + self.notch.get_interlocked_length()
 
