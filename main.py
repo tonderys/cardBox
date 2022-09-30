@@ -30,8 +30,8 @@ class Card_holder():
         return self.bottom
 
 def main():
-    width = 31
-    height = 31
+    width = 46
+    height = 60
     depth = 46
 
     holder = Card_holder(width, height, depth).get_bottom()
