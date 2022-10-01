@@ -36,7 +36,7 @@ class EmptyBox:
                           self.get_wall_z()])(roof)
 
     def scad(self) -> OpenSCADObject:
-        outer = self.outer.scad()
+        outer = difference()(self.outer.scad(),self.get_roof())
         inner = translate((self.get_wall_x(),
                            self.get_wall_y(),
                            self.get_wall_z()))(self.inner.scad())

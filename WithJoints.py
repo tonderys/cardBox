@@ -47,5 +47,17 @@ class WithJoints:
         self.box.increase_width(self._get_delta(self.box.outer.width))
         self.box.increase_height(self._get_delta(self.box.outer.height))
 
+    def get_width(self):
+        return self.box.outer.width + (2 * self._notch.h)
+
+    def get_height(self):
+        return self.box.outer.height + (2 * self._notch.h)
+
+    def get_depth(self):
+        return self.box.outer.depth
+
     def scad(self):
-        return union()(self.box.scad(), self._joints)
+        result = union()(self.box.scad(), self._joints)
+        result = difference()(result, self.box.get_roof())
+        result = translate([self._notch.h, self._notch.h, 0])(result)
+        return result

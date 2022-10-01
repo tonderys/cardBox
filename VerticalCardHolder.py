@@ -9,13 +9,15 @@ class VerticalCardHolder():
         self.box = EmptyBox(interior)
         box_with_joints = WithJoints(self.box)
 
-        diameter = min(0.8 * self.box.outer.width, 20)
+        diameter = min(0.8 * self.box.outer.width, finger_diameter)
 
-        hole = union()(sphere(d=diameter, segments=25), cylinder(d=diameter, h=self.box.outer.depth / 2, segments=25))
-        hole = translate([self.box.outer.width / 2, 0, self.box.outer.depth / 2])(hole)
-        holes = [hole, forward(self.box.outer.height)(hole)]
+        hole = rot_z_to_y(cylinder(d=diameter, h=box_with_joints.get_height()))
+        hole = union()(hole, left(diameter / 2)(cube([diameter, box_with_joints.get_height(), box_with_joints.get_depth() / 2])))
+        hole = translate([box_with_joints.get_width() / 2,
+                          0,
+                          box_with_joints.get_depth() / 2])(hole)
 
-        self.bottom = difference()(box_with_joints.scad(), holes, self.box.get_roof())
+        self.bottom = difference()(box_with_joints.scad(), hole)
 
     def get(self) -> OpenSCADObject:
         return self.bottom
