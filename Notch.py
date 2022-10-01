@@ -1,8 +1,7 @@
 from solid import *
-
+from PrinterConstants import *
 class Notch:
     def __init__(self, height):
-        self.printer_gap = 0.2
         self.a = 6
         self.b = 3
         self.delta = (self.a - self.b) / 2
@@ -10,16 +9,16 @@ class Notch:
         self.height = height
 
     def _down_left(self, height):
-        return [0 + (self.printer_gap / 2), 0, height]
+        return [0 + (printer_gap / 2), 0, height]
 
     def _down_right(self, height):
-        return [self.b - (self.printer_gap / 2), 0, height]
+        return [self.b - (printer_gap / 2), 0, height]
 
     def _up_right(self, height):
-        return [self.b + self.delta - (self.printer_gap / 2), self.h, height]
+        return [self.b + self.delta - (printer_gap / 2), self.h, height]
 
     def _up_left(self, height):
-        return [-self.delta + (self.printer_gap / 2), self.h, height]
+        return [-self.delta + (printer_gap / 2), self.h, height]
 
     def get_interlocked_length(self):
         return self.a + self.b
