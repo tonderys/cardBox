@@ -22,4 +22,4 @@ class CardHolderWithCover():
         return [hole, right(self.box.outer.width)(hole)]
 
     def get(self):
-        return union()(self.bottom, up(self.box.outer.depth)(rotate([0,180,0])(self.top)))
+        return union()(self.bottom, up(self.box.outer.depth)(rot_z_to_down()(self.top)))
