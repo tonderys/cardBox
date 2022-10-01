@@ -1,4 +1,5 @@
 from solid import *
+from solid.utils import *
 
 from Cube import *
 from PrinterConstants import *
@@ -27,6 +28,12 @@ class EmptyBox:
 
     def get_wall_z(self) -> float:
         return (self.outer.depth - self.inner.depth) / 2
+
+    def get_roof(self) -> OpenSCADObject:
+        roof = up(self.inner.depth)(cube([self.inner.width,self.inner.height, self.get_wall_z()]))
+        return translate([self.get_wall_x(),
+                          self.get_wall_y(),
+                          self.get_wall_z()])(roof)
 
     def scad(self) -> OpenSCADObject:
         outer = self.outer.scad()
