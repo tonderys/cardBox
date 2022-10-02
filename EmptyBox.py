@@ -58,10 +58,6 @@ class EmptyBox(MeasuredObject):
     def _get_chamfered_outer(self) -> OpenSCADObject:
         return difference()(self._outer.scad(), self._get_chamfer())
 
-    def get_roof(self) -> OpenSCADObject:
-        roof = up(self._outer.depth - self.get_wall_z())(cube([self._outer.width, self._outer.height, self.get_wall_z()]))
-        return difference()(roof, self._get_chamfered_outer())
-
     def scad(self) -> OpenSCADObject:
         outer = self._get_chamfered_outer()
 

@@ -57,8 +57,17 @@ class WithJoints(MeasuredObject):
     def get_depth(self) -> float:
         return self.box.get_depth()
 
+    def get_wall_x(self) -> float:
+        return (self.box.get_width() - self.box.inner.width) / 2 + self._notch.h
+
+    def get_wall_y(self) -> float:
+        return (self.box.get_height() - self.box.inner.height) / 2 + self._notch.h
+
+    def get_wall_z(self) -> float:
+        return (self.box.get_depth() - self.box.inner.depth) / 2
+
     def scad(self):
         result = union()(self.box.scad(), self._joints)
-        result = difference()(result, self.box.get_roof())
+        # result = difference()(result, self.box.get_roof())
         result = translate([self._notch.h, self._notch.h, 0])(result)
         return result
