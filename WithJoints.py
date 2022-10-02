@@ -9,7 +9,7 @@ from MeasuredObject import *
 class WithJoints(MeasuredObject):
     def __init__(self, box: EmptyBox):
         self.box = box
-        self._notch = Notch(self.box.outer.depth)
+        self._notch = Notch(self.box.get_depth())
         self._adjust_walls()
         self._joints = [self._get_upper_joints(), self._get_right_joints(),
                        self._get_lower_joints(), self._get_left_joints()]
@@ -21,21 +21,21 @@ class WithJoints(MeasuredObject):
         return intersection()(cube([length, self._notch.h, self._notch.height]), joints)
 
     def _get_upper_joints(self):
-        joints = self._get_joints(self.box.outer.width)
-        return forward(self.box.outer.height)(joints)
+        joints = self._get_joints(self.box.get_width())
+        return forward(self.box.get_height())(joints)
 
     def _get_right_joints(self):
-        joints = self._get_joints(self.box.outer.height)
+        joints = self._get_joints(self.box.get_height())
         joints = rotate([0, 0, -90])(joints)
-        return translate([self.box.outer.width, self.box.outer.height, 0])(joints)
+        return translate([self.box.get_width(), self.box.get_height(), 0])(joints)
 
     def _get_lower_joints(self):
-        joints = self._get_joints(self.box.outer.width)
+        joints = self._get_joints(self.box.get_width())
         joints = rotate([0, 0, 180])(joints)
-        return right(self.box.outer.width)(joints)
+        return right(self.box.get_width())(joints)
 
     def _get_left_joints(self):
-        joints = self._get_joints(self.box.outer.height)
+        joints = self._get_joints(self.box.get_height())
         return rotate([0, 0, 90])(joints)
 
     def _get_delta(self, length):
@@ -45,17 +45,17 @@ class WithJoints(MeasuredObject):
         return delta if delta > 0 else delta + self._notch.get_interlocked_length()
 
     def _adjust_walls(self):
-        self.box.increase_width(self._get_delta(self.box.outer.width))
-        self.box.increase_height(self._get_delta(self.box.outer.height))
+        self.box.increase_width(self._get_delta(self.box.get_width()))
+        self.box.increase_height(self._get_delta(self.box.get_height()))
 
     def get_width(self) -> float:
-        return self.box.outer.width + (2 * self._notch.h)
+        return self.box.get_width() + (2 * self._notch.h)
 
     def get_height(self) -> float:
-        return self.box.outer.height + (2 * self._notch.h)
+        return self.box.get_height() + (2 * self._notch.h)
 
     def get_depth(self) -> float:
-        return self.box.outer.depth
+        return self.box.get_depth()
 
     def scad(self):
         result = union()(self.box.scad(), self._joints)

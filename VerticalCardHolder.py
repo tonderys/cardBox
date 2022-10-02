@@ -9,7 +9,7 @@ class VerticalCardHolder():
         self.box = EmptyBox(interior)
         box_with_joints = WithJoints(self.box)
 
-        diameter = min(0.8 * self.box.outer.width, finger_diameter)
+        diameter = min(0.8 * self.box.get_width(), finger_diameter)
 
         hole = rot_z_to_y(cylinder(d=diameter, h=box_with_joints.get_height()))
         hole = union()(hole, left(diameter / 2)(cube([diameter, box_with_joints.get_height(), box_with_joints.get_depth() / 2])))
