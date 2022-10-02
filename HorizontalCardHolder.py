@@ -9,6 +9,7 @@ class HorizontalCardHolder():
     def __init__(self, interior: Cube):
         with_joints = WithJoints(EmptyBox(interior))
         self.box = with_joints.box
+        self.box.chamfer_inside()
         diameter = min(0.8 * with_joints.get_width(), finger_diameter)
 
         self.bottom = difference()(with_joints.scad(), self._get_holes(with_joints, diameter))
