@@ -3,8 +3,9 @@ from solid.utils import *
 
 from Cube import *
 from PrinterConstants import *
+from MeasuredObject import *
 
-class EmptyBox:
+class EmptyBox(MeasuredObject):
     def __init__(self, inner: Cube):
         self.outer = Cube(inner.width + (2 * min_wall_thickness),
                           inner.height + (2 * min_wall_thickness),
@@ -19,6 +20,15 @@ class EmptyBox:
 
     def increase_depth(self, delta: float):
         self.outer.depth += delta
+
+    def get_width(self):
+        return self.outer.width
+
+    def get_height(self):
+        return self.outer.height
+
+    def get_depth(self):
+        return self.outer.depth
 
     def get_wall_x(self) -> float:
         return (self.outer.width - self.inner.width) / 2

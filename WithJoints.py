@@ -4,8 +4,9 @@ from solid.utils import *
 
 from Notch import *
 from EmptyBox import *
+from MeasuredObject import *
 
-class WithJoints:
+class WithJoints(MeasuredObject):
     def __init__(self, box: EmptyBox):
         self.box = box
         self._notch = Notch(self.box.outer.depth)
@@ -47,13 +48,13 @@ class WithJoints:
         self.box.increase_width(self._get_delta(self.box.outer.width))
         self.box.increase_height(self._get_delta(self.box.outer.height))
 
-    def get_width(self):
+    def get_width(self) -> float:
         return self.box.outer.width + (2 * self._notch.h)
 
-    def get_height(self):
+    def get_height(self) -> float:
         return self.box.outer.height + (2 * self._notch.h)
 
-    def get_depth(self):
+    def get_depth(self) -> float:
         return self.box.outer.depth
 
     def scad(self):
