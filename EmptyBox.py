@@ -13,6 +13,8 @@ class EmptyBox(MeasuredObject):
                            inner.height + (2 * min_wall_thickness),
                            inner.depth + (2 * min_wall_thickness))
         self.inner = inner
+        self.roof =translate([self.get_wall_x(), self.get_wall_y(), inner.depth + self.get_wall_z()])(
+                    cube([inner.width, inner.height, self.get_wall_z()]))
 
     def get_width(self):
         return self._outer.width
@@ -42,10 +44,10 @@ class EmptyBox(MeasuredObject):
         return (self.get_depth() - self.inner.depth) / 2
 
     def chamfer_inside(self) -> OpenSCADObject:
-        self.chamfered = True
+        self.roof = chamfer(self)
 
     def scad(self) -> OpenSCADObject:
-        outer = difference()(self._outer.scad(), chamfer(self)) if self.chamfered else self._outer.scad()
+        outer = difference()(self._outer.scad(), self.roof)
 
         inner = translate((self.get_wall_x(),
                            self.get_wall_y(),
