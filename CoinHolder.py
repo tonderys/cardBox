@@ -15,38 +15,38 @@ class CoinHolder(Cube):
         pos = [finger_radius, finger_radius,0]
         self.holes = translate(pos)(self.finger_hole)
 
-        pos = [pos[0] + ((finger_radius + coin_radius) / sqrt(2)),
-               pos[1] + ((finger_radius + coin_radius) / sqrt(2)),
+        pos = [pos[0] + ((finger_radius + coin_radius) / 1.5),
+               pos[1] + ((finger_radius + coin_radius) / 1.5),
                pos[2] + 0]
         self.holes = union()(self.holes,
                              translate(pos)(self.coin_hole))
 
-        pos = [pos[0] + ((finger_radius + coin_radius) / sqrt(2)),
-               pos[1] + ((finger_radius + coin_radius) / sqrt(2)),
+        pos = [pos[0] + ((finger_radius + coin_radius) / 1.5),
+               pos[1] + ((finger_radius + coin_radius) / 1.5),
                pos[2] + 0]
         self.holes = union()(self.holes,
                              translate(pos)(self.finger_hole))
 
-        pos = [pos[0] + ((finger_radius + coin_radius) / sqrt(2)),
-               pos[1] - ((finger_radius + coin_radius) / sqrt(2)),
+        pos = [pos[0] + ((finger_radius + coin_radius) / 1.5),
+               pos[1] - ((finger_radius + coin_radius) / 1.5),
                pos[2] + 0]
         self.holes = union()(self.holes,
                              translate(pos)(self.coin_hole))
 
-        pos = [pos[0] + ((finger_radius + coin_radius) / sqrt(2)),
-               pos[1] - ((finger_radius + coin_radius) / sqrt(2)),
+        pos = [pos[0] + ((finger_radius + coin_radius) / 1.5),
+               pos[1] - ((finger_radius + coin_radius) / 1.5),
                pos[2] + 0]
         self.holes = union()(self.holes,
                              translate(pos)(self.finger_hole))
 
-        pos = [pos[0] + ((finger_radius + coin_radius) / sqrt(2)),
-               pos[1] + ((finger_radius + coin_radius) / sqrt(2)),
+        pos = [pos[0] + ((finger_radius + coin_radius) / 1.5),
+               pos[1] + ((finger_radius + coin_radius) / 1.5),
                pos[2] + 0]
         self.holes = union()(self.holes,
                              translate(pos)(self.coin_hole))
 
-        pos = [pos[0] + ((finger_radius + coin_radius) / sqrt(2)),
-               pos[1] + ((finger_radius + coin_radius) / sqrt(2)),
+        pos = [pos[0] + ((finger_radius + coin_radius) / 1.5),
+               pos[1] + ((finger_radius + coin_radius) / 1.5),
                pos[2] + 0]
         self.holes = union()(self.holes,
                              translate(pos)(self.finger_hole))

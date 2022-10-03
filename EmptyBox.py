@@ -13,8 +13,8 @@ class EmptyBox(MeasuredObject):
                            inner.height + (2 * min_wall_thickness),
                            inner.depth + (2 * min_wall_thickness))
         self.inner = inner
-        self.roof =translate([self.get_wall_x(), self.get_wall_y(), inner.depth + self.get_wall_z()])(
-                    cube([inner.width, inner.height, self.get_wall_z()]))
+        self.roof =translate([self.get_wall_x(), self.get_wall_y(), self.get_depth() - self.get_wall_z()])(
+                    cube([self.get_width(), self.get_height(), self.get_wall_z()]))
 
     def get_width(self):
         return self._outer.width
