@@ -8,7 +8,6 @@ class VerticalCardHolder():
     def __init__(self, interior: Cube):
         self.box = EmptyBox(interior)
         box_with_joints = WithJoints(self.box)
-        self.box.chamfer_inside()
 
         diameter = min(0.8 * self.box.get_width(), finger_diameter)
 
@@ -18,6 +17,7 @@ class VerticalCardHolder():
                           0,
                           box_with_joints.get_depth() / 2])(hole)
 
+        self.box.chamfer_inside()
         self.bottom = difference()(box_with_joints.scad(), hole)
 
     def get(self) -> OpenSCADObject:

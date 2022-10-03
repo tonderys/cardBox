@@ -8,6 +8,7 @@ from Chamfer import *
 
 class EmptyBox(MeasuredObject):
     def __init__(self, inner: Cube):
+        self.chamfered = False
         self._outer = Cube(inner.width + (2 * min_wall_thickness),
                            inner.height + (2 * min_wall_thickness),
                            inner.depth + (2 * min_wall_thickness))
@@ -41,11 +42,13 @@ class EmptyBox(MeasuredObject):
         return (self.get_depth() - self.inner.depth) / 2
 
     def chamfer_inside(self) -> OpenSCADObject:
-        self.outer = difference()(self._outer.scad(), chamfer(self))
+        self.chamfered = True
 
     def scad(self) -> OpenSCADObject:
+        outer = difference()(self._outer.scad(), chamfer(self)) if self.chamfered else self._outer.scad()
+
         inner = translate((self.get_wall_x(),
                            self.get_wall_y(),
                            self.get_wall_z()))(self.inner.scad())
 
-        return difference()(self.outer, inner)
+        return difference()(outer, inner)

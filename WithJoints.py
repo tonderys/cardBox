@@ -68,6 +68,5 @@ class WithJoints(MeasuredObject):
 
     def scad(self):
         result = union()(self.box.scad(), self._joints)
-        # result = difference()(result, self.box.get_roof())
         result = translate([self._notch.h, self._notch.h, 0])(result)
         return result
