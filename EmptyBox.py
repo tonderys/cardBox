@@ -56,3 +56,7 @@ class EmptyBox(MeasuredObject):
                            self.get_wall_z()))(self.inner.scad())
 
         return difference()(outer, inner)
+
+if __name__ == '__main__':
+    obj = EmptyBox(Cube(26,105,31))
+    scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")

@@ -20,5 +20,9 @@ class VerticalCardHolder():
         self.box.chamfer_inside()
         self.bottom = difference()(box_with_joints.scad(), hole)
 
-    def get(self) -> OpenSCADObject:
+    def scad(self) -> OpenSCADObject:
         return self.bottom
+
+if __name__ == '__main__':
+    obj = VerticalCardHolder(Cube(100,20,30))
+    scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")

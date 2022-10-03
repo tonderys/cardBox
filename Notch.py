@@ -38,3 +38,7 @@ class Notch:
                                  [6, 7, 3, 2],
                                  [7, 4, 0, 3],
                                  [7, 6, 5, 4]])
+
+if __name__ == '__main__':
+    obj = Notch(10)
+    scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")

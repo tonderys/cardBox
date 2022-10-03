@@ -12,3 +12,7 @@ class Cube:
 
     def scad(self) -> OpenSCADObject:
         return cube([self.width, self.height,self.depth])
+
+if __name__ == '__main__':
+    obj = Cube(26, 105, 31)
+    scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")

@@ -70,3 +70,7 @@ class WithJoints(MeasuredObject):
         result = union()(self.box.scad(), self._joints)
         result = translate([self._notch.h, self._notch.h, 0])(result)
         return result
+
+if __name__ == '__main__':
+    obj = WithJoints(EmptyBox(Cube(10,20,30)))
+    scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")

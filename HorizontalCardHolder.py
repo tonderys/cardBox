@@ -17,6 +17,10 @@ class HorizontalCardHolder():
         self.with_joints = WithJoints(EmptyBox(interior))
         self.with_joints.box.chamfer_inside()
 
-    def get(self) -> OpenSCADObject:
+    def scad(self) -> OpenSCADObject:
         diameter = min(0.8 * self.with_joints.get_width(), finger_diameter)
         return difference()(self.with_joints.scad(), get_holes(self.with_joints, diameter))
+
+if __name__ == '__main__':
+    obj = HorizontalCardHolder(Cube(26,105,31))
+    scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")
