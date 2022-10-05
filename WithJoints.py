@@ -67,6 +67,8 @@ class WithJoints(MeasuredObject):
         return (self.box.get_depth() - self.box.inner.depth) / 2
 
     def scad(self):
+        print(f"created object with joints {self.get_width()}mm x {self.get_height()}mm x {self.get_depth()}mm")
+
         result = union()(self.box.scad(), self._joints)
         result = translate([self._notch.h, self._notch.h, 0])(result)
         return result
