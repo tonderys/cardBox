@@ -8,7 +8,7 @@ class Cube:
 
     def get_roof(self, depth) -> OpenSCADObject:
         roof = up(self.depth - depth)(cube([self.width, self.height, depth]))
-        return difference()(roof, difference()(roof, self.scad()))
+        return intersection()(roof, self.scad())
 
     def scad(self) -> OpenSCADObject:
         return cube([self.width, self.height,self.depth])
