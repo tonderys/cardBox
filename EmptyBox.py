@@ -33,7 +33,7 @@ class EmptyBox(MeasuredObject):
         self.roof = forward(delta/2)(self.roof)
 
     def increase_depth(self, delta: float):
-        self._outer.deptht += delta
+        self._outer.depth += delta
         self.roof = up(delta/2)(self.roof)
 
     def get_wall_x(self) -> float:
