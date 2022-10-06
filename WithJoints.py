@@ -58,13 +58,13 @@ class WithJoints(MeasuredObject):
         return self.box.get_depth()
 
     def get_wall_x(self) -> float:
-        return (self.box.get_width() - self.box.inner.width) / 2 + self._notch.h
+        return self.box.get_wall_x() + self._notch.h
 
     def get_wall_y(self) -> float:
-        return (self.box.get_height() - self.box.inner.height) / 2 + self._notch.h
+        return self.box.get_wall_y() + self._notch.h
 
     def get_wall_z(self) -> float:
-        return (self.box.get_depth() - self.box.inner.depth) / 2
+        return self.box.get_wall_z()
 
     def scad(self):
         print(f"created object with joints {self.get_width()}mm x {self.get_height()}mm x {self.get_depth()}mm")

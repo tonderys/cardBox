@@ -14,12 +14,14 @@ def get_holes(obj: MeasuredObject, diameter: float) -> OpenSCADObject:
 
 class HorizontalCardHolder():
     def __init__(self, interior: Cube):
-        self.with_joints = WithJoints(EmptyBox(interior))
-        self.with_joints.box.chamfer_inside()
+        base = EmptyBox(interior)
+        base.thicken_floor(2.0)
+        self.body = WithJoints(base)
+        self.body.box.chamfer_inside()
 
     def scad(self) -> OpenSCADObject:
-        diameter = min(0.8 * self.with_joints.get_width(), finger_diameter)
-        return difference()(self.with_joints.scad(), get_holes(self.with_joints, diameter))
+        diameter = min(0.8 * self.body.get_width(), finger_diameter)
+        return difference()(self.body.scad(), get_holes(self.body, diameter))
 
 if __name__ == '__main__':
     obj = HorizontalCardHolder(Cube(26,105,31))

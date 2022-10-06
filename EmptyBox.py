@@ -13,6 +13,8 @@ class EmptyBox(MeasuredObject):
                            inner.height + (2 * min_wall_thickness),
                            inner.depth + (2 * min_wall_thickness))
         self.inner = inner
+        self.floor_thickness = (self.get_depth() - self.inner.depth) / 2
+
         self.roof = translate([self.get_wall_x(), self.get_wall_y(), 2 * self.get_wall_z()])(inner.get_roof(self.get_wall_z()))
 
     def get_width(self):
@@ -35,6 +37,11 @@ class EmptyBox(MeasuredObject):
     def increase_depth(self, delta: float):
         self._outer.depth += delta
         self.roof = up(delta/2)(self.roof)
+        self.floor_thickness += delta/2
+
+    def thicken_floor(self, delta: float):
+        self.increase_depth(delta)
+        self.floor_thickness += delta/2
 
     def get_wall_x(self) -> float:
         return (self.get_width() - self.inner.width) / 2
@@ -43,7 +50,7 @@ class EmptyBox(MeasuredObject):
         return (self.get_height() - self.inner.height) / 2
 
     def get_wall_z(self) -> float:
-        return (self.get_depth() - self.inner.depth) / 2
+        return self.floor_thickness
 
     def chamfer_inside(self) -> OpenSCADObject:
         self.roof = chamfer(self)
@@ -53,7 +60,7 @@ class EmptyBox(MeasuredObject):
 
         inner = translate((self.get_wall_x(),
                            self.get_wall_y(),
-                           self.get_wall_z()))(self.inner.scad())
+                           self.floor_thickness))(self.inner.scad())
 
         return difference()(outer, inner)
 
