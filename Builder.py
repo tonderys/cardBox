@@ -20,6 +20,7 @@ def get_filename(type: Type, *args):
     return f"{path}{typename}_{arguments}mm.scad"
 
 def get_object(type: Type, *args):
+    print(f"{type}, {args}:", end = " ")
     match type:
         case Type.BOWL:
             return WithJoints(EmptyBox(Bowl(*args)))
