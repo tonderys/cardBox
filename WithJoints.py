@@ -5,6 +5,7 @@ from solid.utils import *
 from Notch import *
 from EmptyBox import *
 from MeasuredObject import *
+from Fillet import *
 
 class WithJoints(MeasuredObject):
     def __init__(self, box: EmptyBox):
@@ -71,7 +72,7 @@ class WithJoints(MeasuredObject):
 
         result = union()(self.box.scad(), self._joints)
         result = translate([self._notch.h, self._notch.h, 0])(result)
-        return result
+        return difference()(result, Fillet(self).scad())
 
 if __name__ == '__main__':
     obj = WithJoints(EmptyBox(Cube(10,20,30)))
