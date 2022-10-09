@@ -8,28 +8,28 @@ from Builder import *
 
 class Builder_tests(unittest.TestCase):
     def test_get_filename_with_no_args(self):
-        self.assertEqual(get_filename(Type.BOWL),
-                         "f:\\Druk3D\\STL\\openSCAD\\bowl_mm.scad")
-        self.assertEqual(get_filename(Type.HORIZONTAL_CARD_HOLDER),
-                         "f:\\Druk3D\\STL\\openSCAD\\horizontal_card_holder_mm.scad")
-        self.assertEqual(get_filename(Type.VERTICAL_CARD_HOLDER),
-                         "f:\\Druk3D\\STL\\openSCAD\\vertical_card_holder_mm.scad")
-        self.assertEqual(get_filename(Type.HORIZONTAL_COIN_HOLDER),
-                         "f:\\Druk3D\\STL\\openSCAD\\horizontal_coin_holder_mm.scad")
+        self.assertEqual(get_filename("a", Type.BOWL),
+                         "f:\\Druk3D\\STL\\openSCAD\\a_bowl_mm.scad")
+        self.assertEqual(get_filename("a", Type.HORIZONTAL_CARD_HOLDER),
+                         "f:\\Druk3D\\STL\\openSCAD\\a_horizontal_card_holder_mm.scad")
+        self.assertEqual(get_filename("a", Type.VERTICAL_CARD_HOLDER),
+                         "f:\\Druk3D\\STL\\openSCAD\\a_vertical_card_holder_mm.scad")
+        self.assertEqual(get_filename("a", Type.HORIZONTAL_COIN_HOLDER),
+                         "f:\\Druk3D\\STL\\openSCAD\\a_horizontal_coin_holder_mm.scad")
 
     def test_get_filename_with_int_args(self):
-        self.assertEqual(get_filename(Type.BOWL, 1),
-                         "f:\\Druk3D\\STL\\openSCAD\\bowl_1mm.scad")
-        self.assertEqual(get_filename(Type.BOWL, 1, 2),
-                         "f:\\Druk3D\\STL\\openSCAD\\bowl_1x2mm.scad")
-        self.assertEqual(get_filename(Type.BOWL, 21, 34, 55, 89, 144),
-                         "f:\\Druk3D\\STL\\openSCAD\\bowl_21x34x55x89x144mm.scad")
+        self.assertEqual(get_filename("object: a",Type.BOWL, 1),
+                         "f:\\Druk3D\\STL\\openSCAD\\object: a_bowl_1mm.scad")
+        self.assertEqual(get_filename("object: a",Type.BOWL, 1, 2),
+                         "f:\\Druk3D\\STL\\openSCAD\\object: a_bowl_1x2mm.scad")
+        self.assertEqual(get_filename("object: a",Type.BOWL, 21, 34, 55, 89, 144),
+                         "f:\\Druk3D\\STL\\openSCAD\\object: a_bowl_21x34x55x89x144mm.scad")
 
     def test_get_filename_with_various_args(self):
-        self.assertEqual(get_filename(Type.BOWL, 1.0),
-                         "f:\\Druk3D\\STL\\openSCAD\\bowl_1.0mm.scad")
-        self.assertEqual(get_filename(Type.BOWL, '1,5', 2, 3.4),
-                         "f:\\Druk3D\\STL\\openSCAD\\bowl_1,5x2x3.4mm.scad")
+        self.assertEqual(get_filename("some bowl", Type.BOWL, 1.0),
+                         "f:\\Druk3D\\STL\\openSCAD\\some bowl_bowl_1.0mm.scad")
+        self.assertEqual(get_filename("some bowl", Type.BOWL, '1,5', 2, 3.4),
+                         "f:\\Druk3D\\STL\\openSCAD\\some bowl_bowl_1,5x2x3.4mm.scad")
 
     def test_get_object_raises_TypeError_for_bowl_with_wrong_args(self):
         self.assertRaises(TypeError, get_object, Type.BOWL)
