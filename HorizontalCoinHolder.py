@@ -10,7 +10,6 @@ class HorizontalCoinHolder(Cube):
         Cube.__init__(self, coin_diameter, height + coin_diameter, depth)
 
         coin_radius = coin_diameter / 2
-        self.coin_hole = cylinder(d=coin_diameter, h=depth)
 
         coins = translate([coin_radius, coin_radius, coin_radius])(rot_z_to_y(cylinder(d=coin_diameter, h=height)))
         path = translate([0,coin_radius, coin_radius])(cube([coin_diameter, height, depth - coin_radius]))
