@@ -1,18 +1,17 @@
 from solid import *
-from solid.utils import *
-class Cube:
+
+class Interior:
     def __init__(self, width: float, height: float, depth: float):
         self.width = width
         self.height = height
         self.depth = depth
 
+    def get_boundaries(self) -> OpenSCADObject:
+        return cube([self.width, self.height, self.depth])
+
     def get_roof(self, depth) -> OpenSCADObject:
         roof = up(self.depth - depth)(cube([self.width, self.height, depth]))
-        return intersection()(roof, self.scad())
+        return intersection(roof, self.scad())
 
     def scad(self) -> OpenSCADObject:
-        return cube([self.width, self.height,self.depth])
-
-if __name__ == '__main__':
-    obj = Cube(26, 105, 31)
-    scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")
+        return intersection()(self.body, self.get_boundaries())
