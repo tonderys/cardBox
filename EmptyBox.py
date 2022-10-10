@@ -11,7 +11,7 @@ class EmptyBox(MeasuredObject):
         self.chamfered = False
         self._outer = Cube(inner.width + (2 * min_wall_thickness),
                            inner.height + (2 * min_wall_thickness),
-                           inner.depth + (2 * min_wall_thickness))
+                           inner.depth + (2 * min_floor_thickness))
         self.inner = inner
         self.floor_thickness = (self.get_depth() - self.inner.depth) / 2
 
