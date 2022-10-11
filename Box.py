@@ -21,16 +21,13 @@ class Box():
         return self.inner.depth + self.roof_thickness + self.floor_thickness
 
     def increase_width(self, delta: float):
-        self.x_wall_thickness += delta
+        self.x_wall_thickness += delta / 2
 
     def increase_height(self, delta: float):
-        self.y_wall_thickness += delta
+        self.y_wall_thickness += delta / 2
 
     def thicken_floor(self, delta: float):
         self.floor_thickness += delta
-
-    def chamfer_inside(self) -> OpenSCADObject:
-        self.roof_thickness = chamfer(self)
 
     def scad(self) -> OpenSCADObject:
         outer = cube([self.inner.width + (2 * self.x_wall_thickness),
