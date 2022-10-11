@@ -1,7 +1,7 @@
 from solid import *
 from solid.utils import  *
 from MeasuredObject import *
-from EmptyBox import *
+from Box import *
 from WithJoints import *
 
 def get_all_combinations(delta_x, delta_y, delta_z, obj: MeasuredObject, offset: float= 0):
@@ -48,5 +48,5 @@ class Fillet:
         return self.excess
 
 if __name__ == '__main__':
-    obj = Fillet(EmptyBox(Cube(15,15,30)), 2)
+    obj = Fillet(Box(Cube(15, 15, 30)), 2)
     scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")
