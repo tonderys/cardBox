@@ -1,7 +1,7 @@
 from solid import *
 from solid.utils import *
 
-from Interior import *
+from parametrizedBox.interior.Interior import *
 
 class Pipe(Interior):
     def __init__(self, diameter, height, depth):

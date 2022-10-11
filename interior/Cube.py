@@ -1,7 +1,7 @@
 from solid import *
 from solid.utils import *
 
-from Interior import *
+from parametrizedBox.interior.Interior import *
 
 class Cube:
     def __init__(self, width: float, height: float, depth: float):
