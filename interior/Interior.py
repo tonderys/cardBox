@@ -1,4 +1,5 @@
 from solid import *
+from solid.utils import *
 
 class Interior:
     def __init__(self, width: float, height: float, depth: float):
@@ -11,7 +12,7 @@ class Interior:
 
     def get_roof(self, depth) -> OpenSCADObject:
         roof = up(self.depth - depth)(cube([self.width, self.height, depth]))
-        return intersection(roof, self.scad())
+        return intersection()(roof, self.scad())
 
     def scad(self) -> OpenSCADObject:
         return intersection()(self.body, self.get_boundaries())
