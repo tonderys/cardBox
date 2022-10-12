@@ -1,7 +1,8 @@
 from parametrizedBox.helpers.Chamfer import *
+from parametrizedBox.helpers.PrinterConstants import *
+
 from parametrizedBox.interior.Interior import *
 from parametrizedBox.interior.Cube import *
-from parametrizedBox.helpers.PrinterConstants import *
 
 class Box():
     def __init__(self, inner: Interior):
@@ -9,16 +10,25 @@ class Box():
         self.roof_thickness = min_floor_thickness
         self.x_wall_thickness = min_wall_thickness
         self.y_wall_thickness = min_wall_thickness
-
         self.inner = inner
-    def get_width(self):
+
+    def get_width(self) -> float:
         return self.inner.width + (2 * self.x_wall_thickness)
 
-    def get_height(self):
+    def get_height(self) -> float:
         return self.inner.height + (2 * self.y_wall_thickness)
 
-    def get_depth(self):
+    def get_depth(self) -> float:
         return self.inner.depth + self.roof_thickness + self.floor_thickness
+
+    def get_wall_x(self) -> float:
+        return self.x_wall_thickness
+
+    def get_wall_y(self) -> float:
+        return self.y_wall_thickness
+
+    def get_floor(self) -> float:
+        return self.floor_thickness
 
     def increase_width(self, delta: float):
         self.x_wall_thickness += delta / 2
@@ -43,7 +53,7 @@ class Box():
 
         return difference()(outer, inner, roof)
 
-from parametrizedBox.interior.Cube import *
 if __name__ == '__main__':
+    from parametrizedBox.interior.Cube import *
     obj = Box(Cube(26, 105, 31))
     scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")

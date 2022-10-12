@@ -1,13 +1,13 @@
 from solid import *
 from solid.utils import  *
-from MeasuredObject import *
-from Box import *
-from WithJoints import *
 
-def get_all_combinations(delta_x, delta_y, delta_z, obj: MeasuredObject, offset: float= 0):
+from parametrizedBox.Box import *
+from parametrizedBox.WithJoints import *
+
+def get_all_combinations(delta_x, delta_y, delta_z, obj: Box, offset: float= 0):
     return [[[translate([offset + x, offset + y, offset + z])(obj) for x in delta_x] for y in delta_y] for z in delta_z]
 
-def get_excess(obj: MeasuredObject, r: float):
+def get_excess(obj: Box, r: float):
     height = obj.get_height() - r
     width = obj.get_width() - r
     depth = obj.get_depth() - r
@@ -20,7 +20,7 @@ def get_excess(obj: MeasuredObject, r: float):
             get_all_combinations(delta_x = [0, width], delta_y = [0], delta_z = [0, depth], obj = cube_y) +
             get_all_combinations(delta_x = [0, width], delta_y = [0, height], delta_z = [0], obj = cube_z))
 
-def get_trimmed_corners(obj: MeasuredObject, r: float):
+def get_trimmed_corners(obj: Box, r: float):
     segments = 20
 
     height = obj.get_height() - (2 * r)
@@ -39,7 +39,7 @@ def get_trimmed_corners(obj: MeasuredObject, r: float):
 
 
 class Fillet:
-    def __init__(self, obj: MeasuredObject, r: float = 2):
+    def __init__(self, obj: Box, r: float = 2):
         self.excess = difference()(
             union()([e for e in get_excess(obj, r)]),
             union()([c for c in get_trimmed_corners(obj, r)]))
