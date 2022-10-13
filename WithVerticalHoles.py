@@ -16,13 +16,31 @@ def get_holes(obj: Box, diameter: float) -> OpenSCADObject:
 class WithVerticalHoles(Box):
     def __init__(self, box: Box):
         Box.__init__(self, box.inner)
-        box.thicken_floor(2.0)
         self.box = box
+        self.box.thicken_floor(2.0)
+
+    def get_width(self) -> float:
+        return self.box.get_width()
+
+    def get_height(self) -> float:
+        return self.box.get_height()
+
+    def get_depth(self) -> float:
+        return self.box.get_depth()
+
+    def get_wall_x(self) -> float:
+        return self.box.get_wall_x()
+
+    def get_wall_y(self) -> float:
+        return self.box.get_wall_y()
+
+    def get_floor(self) -> float:
+        return self.box.get_floor()
 
     def scad(self) -> OpenSCADObject:
-        diameter = min(0.8 * self.box.get_width(), finger_diameter)
-        return difference()(self.box.scad(), get_holes(self.box, diameter))
+        diameter = min(0.8 * self.get_width(), finger_diameter)
+        return difference()(self.box.scad(), get_holes(self, diameter))
 
 if __name__ == '__main__':
-    obj = WithVerticalHoles(WithHorizontalHole(WithJoints(Box(Cube(26, 105, 31)))))
+    obj = WithHorizontalHole(WithVerticalHoles(WithJoints(Box(Cube(26, 105, 31)))))
     scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")

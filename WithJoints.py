@@ -53,10 +53,10 @@ class WithJoints(Box):
         return self.box.get_depth()
 
     def get_wall_x(self) -> float:
-        return self.box.get_wall_x() + self._notch.h
+        return (self.get_width() - self.box.inner.width) / 2
 
     def get_wall_y(self) -> float:
-        return self.box.get_wall_y() + self._notch.h
+        return (self.get_height() - self.box.inner.height) / 2
 
     def get_floor(self) -> float:
         return self.box.get_floor()
@@ -79,10 +79,8 @@ class WithJoints(Box):
     def scad(self):
         joints = [self._get_upper_joints(), self._get_right_joints(),
                   self._get_lower_joints(), self._get_left_joints()]
-        result = union()(self._move_by_delta()(self.box.scad()), self._get_case(), joints)
-        result = translate([self._notch.h, self._notch.h, 0])(result)
-        print(f"created object with joints {self.get_width()}mm x {self.get_height()}mm x {self.get_depth()}mm")
-        return result
+        body = union()(self._move_by_delta()(self.box.scad()), self._get_case(), joints)
+        return translate([self._notch.h, self._notch.h, 0])(body)
 
 if __name__ == '__main__':
     obj = Box(Cube(10, 20, 30))
