@@ -30,12 +30,6 @@ class Box():
     def get_floor(self) -> float:
         return self.floor_thickness
 
-    def increase_width(self, delta: float):
-        self.x_wall_thickness += delta / 2
-
-    def increase_height(self, delta: float):
-        self.y_wall_thickness += delta / 2
-
     def thicken_floor(self, delta: float):
         self.floor_thickness += delta
 

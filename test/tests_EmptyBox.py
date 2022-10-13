@@ -17,21 +17,6 @@ class EmptyBox_tests(unittest.TestCase):
         self.assertEqual(sut.get_wall_y(), min_wall_thickness)
         self.assertEqual(sut.get_wall_z(), min_floor_thickness)
 
-    def test_get_wall_x_of_modified_box_should_return_minimal_wall_thickness_increased_by_delta(self):
-        sut = EmptyBox(Cube(_, _, _))
-        sut.increase_width(5)
-        self.assertEqual(sut.get_wall_x(), min_wall_thickness + (5/2))
-
-    def test_get_wall_y_of_modified_box_should_return_minimal_wall_thickness_increased_by_delta(self):
-        sut = EmptyBox(Cube(_, _, _))
-        sut.increase_height(7)
-        self.assertEqual(sut.get_wall_y(), min_wall_thickness + (7/2))
-
-    def test_get_wall_z_of_modified_box_should_return_minimal_wall_thickness_increased_by_delta(self):
-        sut = EmptyBox(Cube(_, _, _))
-        sut.increase_depth(4)
-        self.assertEqual(sut.get_wall_z(), min_floor_thickness + (4/2))
-
     def test_basic_empty_box_has_outer_diameters_enlarged_by_minimal_wall_thickness_on_each_side(self):
         sut = EmptyBox(Cube(10, 20, 30))
         self.assertEqual(sut.get_width(), 10 + walls)
