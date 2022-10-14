@@ -1,5 +1,7 @@
 from solid import *
 
+from parametrizedBox.interior.Interior import *
+
 from parametrizedBox.PlainBox import *
 
 def chamfer(box: Interior) -> OpenSCADObject:
