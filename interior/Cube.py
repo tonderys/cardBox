@@ -1,11 +1,16 @@
 from solid import *
 from solid.utils import *
 
+from parametrizedBox.helpers.Chamfer import *
+
 from parametrizedBox.interior.Interior import *
 
 class Cube(Interior):
     def __init__(self, width: float, height: float, depth: float):
         Interior.__init__(self, width, height, depth)
+
+    def get_roof(self, depth) -> OpenSCADObject:
+        return  chamfer(self)
 
     def scad(self):
         return cube([self.width, self.height, self.depth])

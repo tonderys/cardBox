@@ -1,9 +1,14 @@
 from solid import *
 from solid.utils import *
 
+from parametrizedBox.helpers.Chamfer import *
+
 from parametrizedBox.interior.Interior import *
 
 class Pipe(Interior):
+    def get_roof(self, depth) -> OpenSCADObject:
+        return  chamfer(self)
+
     def __init__(self, diameter, height, depth):
         Interior.__init__(self, diameter, height, depth)
 
