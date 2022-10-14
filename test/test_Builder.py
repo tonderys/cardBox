@@ -1,10 +1,6 @@
-import types
 import unittest
-import sys
 
-sys.path.append("..")
-
-from Builder import *
+from parametrizedBox.Builder import *
 
 class Builder_tests(unittest.TestCase):
     def test_get_filename_with_no_args(self):
