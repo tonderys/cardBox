@@ -56,14 +56,37 @@ class Builder_tests(unittest.TestCase):
         self.assertRaises(TypeError, get_object, Type.HORIZONTAL_COIN_HOLDER, max, min, max)
 
     def test_get_object_with_proper_arguments_returns_bowl(self):
-        self.assertIsInstance(get_object(Type.BOWL, 63.5, 88, 25), WithJoints)
+        obj = get_object(Type.BOWL, 63.5, 88, 25)
+
+        self.assertIsInstance(obj, WithRoundedCorners)
+        self.assertIsInstance(obj.box, WithJoints)
+        self.assertIsInstance(obj.box.box, PlainBox)
+        self.assertIsInstance(obj.box.box.inner, Bowl)
 
     def test_get_object_with_proper_arguments_returns_horizontal_card_holder(self):
-        self.assertIsInstance(get_object(Type.HORIZONTAL_CARD_HOLDER, 63.5, 88, 25), HorizontalCardHolder)
+        obj = get_object(Type.HORIZONTAL_CARD_HOLDER, 63.5, 88, 25)
+
+        self.assertIsInstance(obj, WithRoundedCorners)
+        self.assertIsInstance(obj.box, WithVerticalHoles)
+        self.assertIsInstance(obj.box.box, WithJoints)
+        self.assertIsInstance(obj.box.box.box, PlainBox)
+        self.assertIsInstance(obj.box.box.box.inner, Cube)
 
     def test_get_object_with_proper_arguments_returns_certical_card_holder(self):
-        self.assertIsInstance(get_object(Type.VERTICAL_CARD_HOLDER, 63.5, 88, 25), VerticalCardHolder)
+        obj = get_object(Type.VERTICAL_CARD_HOLDER, 63.5, 88, 25)
+
+        self.assertIsInstance(obj, WithRoundedCorners)
+        self.assertIsInstance(obj.box, WithHorizontalHole)
+        self.assertIsInstance(obj.box.box, WithJoints)
+        self.assertIsInstance(obj.box.box.box, PlainBox)
+        self.assertIsInstance(obj.box.box.box.inner, Cube)
 
     def test_get_object_with_proper_arguments_returns_horizontal_coin_holder(self):
-        self.assertIsInstance(get_object(Type.HORIZONTAL_COIN_HOLDER, 63.5, 88, 25), WithJoints)
+        obj = get_object(Type.HORIZONTAL_COIN_HOLDER, 63.5, 88, 25)
+
+        self.assertIsInstance(obj, WithRoundedCorners)
+        self.assertIsInstance(obj.box, WithHorizontalHole)
+        self.assertIsInstance(obj.box.box, WithJoints)
+        self.assertIsInstance(obj.box.box.box, PlainBox)
+        self.assertIsInstance(obj.box.box.box.inner, Pipe)
 
