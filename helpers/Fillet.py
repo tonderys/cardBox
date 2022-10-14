@@ -1,8 +1,7 @@
 from solid import *
 from solid.utils import  *
 
-from parametrizedBox.Box import *
-from parametrizedBox.WithJoints import *
+from parametrizedBox import Box
 
 def get_all_combinations(delta_x, delta_y, delta_z, obj: Box, offset: float= 0):
     return [[[translate([offset + x, offset + y, offset + z])(obj) for x in delta_x] for y in delta_y] for z in delta_z]
@@ -48,5 +47,7 @@ class Fillet:
         return self.excess
 
 if __name__ == '__main__':
-    obj = Fillet(Box(Cube(15, 15, 30)), 2)
+    from parametrizedBox.PlainBox import *
+
+    obj = Fillet(PlainBox(Cube(15, 15, 30)), 2)
     scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")
