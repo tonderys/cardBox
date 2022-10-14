@@ -7,6 +7,8 @@ from parametrizedBox.WithJoints import *
 from parametrizedBox.WithHorizontalHole import *
 
 def get_holes(obj: Box, diameter: float) -> OpenSCADObject:
+    diameter = min(0.4 * obj.get_width(), diameter)
+
     hole = union()(cylinder(d=diameter, h=obj.get_floor(), segments=36),
                    back(diameter / 2)(cube([obj.get_wall_x(), diameter, obj.get_depth()])))
     holes = [right(obj.get_width() - obj.get_wall_x())(hole),

@@ -1,7 +1,7 @@
 from solid import *
 from solid.utils import  *
 
-from parametrizedBox import Box
+from parametrizedBox.Box import Box
 
 def get_all_combinations(delta_x, delta_y, delta_z, obj: Box, offset: float= 0):
     return [[[translate([offset + x, offset + y, offset + z])(obj) for x in delta_x] for y in delta_y] for z in delta_z]

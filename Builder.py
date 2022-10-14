@@ -1,10 +1,17 @@
 from enum import Enum
-from solid import *
 
-from VerticalCardHolder import *
-from HorizontalCardHolder import *
-from HorizontalCoinHolder import *
-from Bowl import *
+from parametrizedBox.helpers.Fillet import *
+
+from parametrizedBox.interior.Bowl import *
+from parametrizedBox.interior.Cube import *
+from parametrizedBox.interior.Pipe import *
+
+from parametrizedBox.PlainBox import *
+from parametrizedBox.WithHorizontalHole import *
+from parametrizedBox.WithJoints import *
+from parametrizedBox.WithRoundedCorners import *
+from parametrizedBox.WithVerticalHoles import *
+
 
 path = "f:\\Druk3D\\STL\\openSCAD\\"
 
@@ -22,17 +29,18 @@ def get_filename(name: str, type: Type, *args):
 def get_object(type: Type, *args):
     match type:
         case Type.BOWL:
-            return WithJoints(EmptyBox(Bowl(*args)))
+            obj = WithJoints(PlainBox(Bowl(*args)))
         case Type.HORIZONTAL_CARD_HOLDER:
-            return HorizontalCardHolder(Cube(*args))
+            obj = WithVerticalHoles(WithJoints(PlainBox(Cube(*args))))
         case Type.VERTICAL_CARD_HOLDER:
-            return VerticalCardHolder(Cube(*args))
+            obj = WithHorizontalHole(WithJoints(PlainBox(Cube(*args))))
         case Type.HORIZONTAL_COIN_HOLDER:
-            return WithJoints(EmptyBox(HorizontalCoinHolder(*args)))
+            obj = WithHorizontalHole(WithJoints(PlainBox(Pipe(*args))))
+    return WithRoundedCorners(obj)
 
 def build(name: str, type: Type, *args):
     print(f"{name}\n{type}{args}:", end = " ")
     scad_render_to_file(get_object(type, *args).scad(), get_filename(name, type, *args))
 
 if __name__ == '__main__':
-    build("test", Type.BOWL, 1,1,2)
+    build("test", Type.BOWL, 10,100,20)
