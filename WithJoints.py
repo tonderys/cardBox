@@ -2,11 +2,10 @@ from numpy import *
 
 from parametrizedBox.helpers.Fillet import *
 from parametrizedBox.helpers.Notch import *
-from parametrizedBox.Box import *
+from parametrizedBox.PlainBox import *
 
 class WithJoints(Box):
     def __init__(self, box: Box):
-        Box.__init__(self, box.inner)
         self.box = box
         self._notch = Notch(self.box.get_depth())
 
@@ -61,6 +60,9 @@ class WithJoints(Box):
     def get_floor(self) -> float:
         return self.box.get_floor()
 
+    def thicken_floor(self, delta: float):
+        self.box.thicken_floor(delta)
+
     def _get_case(self) -> OpenSCADObject:
         return difference()(
                 cube([self.width,
@@ -83,7 +85,7 @@ class WithJoints(Box):
         return translate([self._notch.h, self._notch.h, 0])(body)
 
 if __name__ == '__main__':
-    obj = Box(Cube(10, 20, 30))
-    for i in range(10):
+    obj = PlainBox(Cube(10, 20, 30))
+    for i in range(3):
         obj = WithJoints(obj)
     scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")
