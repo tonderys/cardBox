@@ -7,13 +7,11 @@ from parametrizedBox.interior.Interior import *
 
 class Cube(Interior):
     def __init__(self, width: float, height: float, depth: float):
-        Interior.__init__(self, width, height, depth)
+        Interior.__init__(self, "Cube", width, height, depth)
+        self.body = cube([self.width, self.height, self.depth])
 
     def get_roof(self, depth) -> OpenSCADObject:
         return  chamfer(self)
-
-    def scad(self):
-        return cube([self.width, self.height, self.depth])
 
 if __name__ == '__main__':
     obj = Cube(26, 105, 31)

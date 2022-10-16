@@ -6,7 +6,7 @@ from parametrizedBox.interior.Interior import *
 
 class Bowl(Interior):
     def __init__(self, width: float, height: float, depth:float):
-        Interior.__init__(self, width, height, depth)
+        Interior.__init__(self, "Bowl", width, height, depth)
         r = depth / 2
         inside = translate([r,r,r])(sphere(r = r, segments = 100))
 

@@ -52,10 +52,10 @@ class WithJoints(Box):
         return self.box.get_depth()
 
     def get_wall_x(self) -> float:
-        return (self.get_width() - self.box.inner.width) / 2
+        return (self.get_width() - self.box.box.get_width()) / 2
 
     def get_wall_y(self) -> float:
-        return (self.get_height() - self.box.inner.height) / 2
+        return (self.get_height() - self.box.box.get_height()) / 2
 
     def get_floor(self) -> float:
         return self.box.get_floor()
@@ -82,6 +82,7 @@ class WithJoints(Box):
         joints = [self._get_upper_joints(), self._get_right_joints(),
                   self._get_lower_joints(), self._get_left_joints()]
         body = union()(self._move_by_delta()(self.box.scad()), self._get_case(), joints)
+
         return translate([self._notch.h, self._notch.h, 0])(body)
 
 if __name__ == '__main__':

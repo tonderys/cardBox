@@ -14,6 +14,9 @@ class WithHorizontalHole(Box):
         card_width = self.box.get_width() - (self.box.get_wall_x() * 2)
         return min(0.8 * card_width, finger_diameter)
 
+    def log(self) -> str:
+        return f"{self.box.log()}  {type(self).__name__}"
+
     def scad(self) -> OpenSCADObject:
         diameter = self._get_diameter()
         hole = rot_z_to_y(cylinder(d=diameter, h=self.box.get_height()))

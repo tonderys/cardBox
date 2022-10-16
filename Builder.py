@@ -39,8 +39,9 @@ def get_object(type: Type, *args):
     return WithRoundedCorners(obj)
 
 def build(name: str, type: Type, *args):
-    print(f"{name}\n{type}{args}:", end = " ")
-    scad_render_to_file(get_object(type, *args).scad(), get_filename(name, type, *args))
+    obj = get_object(type, *args)
+    print(f"{name}\n{type}{args}:\n{obj.log()}\n")
+    scad_render_to_file(obj.scad(), get_filename(name, type, *args))
 
 if __name__ == '__main__':
     build("test", Type.BOWL, 10,100,20)

@@ -10,7 +10,7 @@ class Pipe(Interior):
         return  chamfer(self)
 
     def __init__(self, diameter, height, depth):
-        Interior.__init__(self, diameter, height, depth)
+        Interior.__init__(self, "Pipe", diameter, height, depth)
 
         r = diameter / 2
 

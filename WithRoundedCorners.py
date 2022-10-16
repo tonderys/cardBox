@@ -8,6 +8,9 @@ class WithRoundedCorners(Box):
     def __init__(self, box: Box):
         self.box = box
 
+    def log(self) -> str:
+        return f"{self.box.log()}  {type(self).__name__}"
+
     def scad(self) -> OpenSCADObject:
         return difference()(self.box.scad(), Fillet(self.box).scad())
 

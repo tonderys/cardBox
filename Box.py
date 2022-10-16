@@ -20,5 +20,11 @@ class Box():
     def thicken_floor(self, delta: float):
         self.box.thicken_floor(delta)
 
+    def log(self) -> str:
+        return self.box.log() + "\n" + \
+               f"created {type(self).__name__} " + \
+               f"with dimensions {self.get_width()}(w) x {self.get_height()}(h) x {self.get_depth()}(d) " + \
+               f"and walls {self.get_wall_x()}(x) {self.get_wall_y()}(y) {self.get_floor()}(floor)"
+
     def scad(self):
         pass

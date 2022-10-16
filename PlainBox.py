@@ -12,16 +12,16 @@ class PlainBox(Box):
         self.roof_thickness = min_floor_thickness
         self.x_wall_thickness = min_wall_thickness
         self.y_wall_thickness = min_wall_thickness
-        self.inner = inner
+        self.box = inner
 
     def get_width(self) -> float:
-        return self.inner.width + (2 * self.x_wall_thickness)
+        return self.box.get_width() + (2 * self.x_wall_thickness)
 
     def get_height(self) -> float:
-        return self.inner.height + (2 * self.y_wall_thickness)
+        return self.box.get_height() + (2 * self.y_wall_thickness)
 
     def get_depth(self) -> float:
-        return self.inner.depth + self.roof_thickness + self.floor_thickness
+        return self.box.get_depth() + self.roof_thickness + self.floor_thickness
 
     def get_wall_x(self) -> float:
         return self.x_wall_thickness
@@ -36,16 +36,16 @@ class PlainBox(Box):
         self.floor_thickness += delta
 
     def scad(self) -> OpenSCADObject:
-        outer = cube([self.inner.width + (2 * self.x_wall_thickness),
-                      self.inner.height + (2 * self.y_wall_thickness),
-                      self.inner.depth + self.floor_thickness + self.roof_thickness])
+        outer = cube([self.get_width(),
+                      self.get_height(),
+                      self.get_depth()])
 
         inner = translate((self.x_wall_thickness,
                            self.y_wall_thickness,
-                           self.floor_thickness))(self.inner.scad())
+                           self.floor_thickness))(self.box.scad())
         roof = translate([self.x_wall_thickness,
                           self.y_wall_thickness,
-                          self.roof_thickness + self.floor_thickness])(self.inner.get_roof(self.roof_thickness))
+                          self.roof_thickness + self.floor_thickness])(self.box.get_roof(self.roof_thickness))
 
         return difference()(outer, inner, roof)
 

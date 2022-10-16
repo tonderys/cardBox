@@ -15,6 +15,9 @@ def get_holes(obj: Box, diameter: float) -> OpenSCADObject:
              right(obj.get_wall_x())(rotate([0, 0, 180])(hole))]
     return [forward(obj.get_height() / 2)(hole) for hole in holes]
 
+    def log(self) -> str:
+        return f"{self.box.log()}  {type(self).__name__}"
+
 class WithVerticalHoles(Box):
     def __init__(self, box: Box):
         self.box = box
