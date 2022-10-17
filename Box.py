@@ -17,9 +17,6 @@ class Box():
     def get_floor(self) -> float:
         return self.box.get_floor()
 
-    def thicken_floor(self, delta: float):
-        self.box.thicken_floor(delta)
-
     def log(self) -> str:
         return self.box.log() + "\n" + \
                f"created {type(self).__name__} " + \

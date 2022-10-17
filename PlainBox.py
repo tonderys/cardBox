@@ -32,9 +32,6 @@ class PlainBox(Box):
     def get_floor(self) -> float:
         return self.floor_thickness
 
-    def thicken_floor(self, delta: float):
-        self.floor_thickness += delta
-
     def scad(self) -> OpenSCADObject:
         outer = cube([self.get_width(),
                       self.get_height(),

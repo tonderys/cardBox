@@ -11,7 +11,7 @@ class Cube(Interior):
         self.body = cube([self.width, self.height, self.depth])
 
     def get_roof(self, depth) -> OpenSCADObject:
-        return  chamfer(self)
+        return chamfer(self)
 
 if __name__ == '__main__':
     obj = Cube(26, 105, 31)

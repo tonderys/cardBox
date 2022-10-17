@@ -2,8 +2,6 @@ from solid import *
 
 from parametrizedBox.interior.Interior import *
 
-from parametrizedBox.PlainBox import *
-
 def chamfer(box: Interior) -> OpenSCADObject:
     chamfer_depth = 2
     return polyhedron(points=[[0, 0, box.depth - chamfer_depth],

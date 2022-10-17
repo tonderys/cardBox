@@ -48,20 +48,12 @@ class WithJoints(Box):
     def get_height(self) -> float:
         return self.height + (2 * self._notch.h)
 
-    def get_depth(self) -> float:
-        return self.box.get_depth()
-
     def get_wall_x(self) -> float:
         return (self.get_width() - self.box.box.get_width()) / 2
 
     def get_wall_y(self) -> float:
         return (self.get_height() - self.box.box.get_height()) / 2
 
-    def get_floor(self) -> float:
-        return self.box.get_floor()
-
-    def thicken_floor(self, delta: float):
-        self.box.thicken_floor(delta)
 
     def _get_case(self) -> OpenSCADObject:
         return difference()(
