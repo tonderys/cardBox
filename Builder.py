@@ -35,7 +35,10 @@ def get_object(type: Type, *args):
         case Type.VERTICAL_CARD_HOLDER:
             obj = WithHorizontalHole(WithJoints(PlainBox(Cube(*args))))
         case Type.HORIZONTAL_COIN_HOLDER:
-            obj = WithHorizontalHole(WithJoints(PlainBox(SeparateTokensHolder(*args))))
+            if isinstance(args[0], Measured):
+                obj = WithHorizontalHole(WithJoints(PlainBox(SeparateTokensHolder(*args))))
+            else:
+                obj = WithHorizontalHole(WithJoints(PlainBox(Pipe(*args))))
     return WithRoundedCorners(obj)
 
 def build(name: str, type: Type, *args):
