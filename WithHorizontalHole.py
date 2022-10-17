@@ -27,7 +27,7 @@ class WithHorizontalHole(Box):
                                  self.box.get_depth() / 2])))
         hole = translate([self.box.get_width() / 2,
                           0,
-                          self.box.get_depth() / 2])(hole)
+                          self.box.get_depth() - (diameter / 2)])(hole)
 
         self.bottom = difference()(self.box.scad(), hole)
         return self.bottom
