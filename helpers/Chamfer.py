@@ -1,6 +1,6 @@
 from solid import *
 
-from parametrizedBox.interior.Interior import *
+from parametricBox.interior.Interior import *
 
 def chamfer(box: Interior) -> OpenSCADObject:
     chamfer_depth = 2

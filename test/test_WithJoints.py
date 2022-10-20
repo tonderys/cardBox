@@ -1,11 +1,11 @@
 import unittest
 
-from parametrizedBox.interior.Cube import *
+from parametricBox.interior.Cube import *
 
-from parametrizedBox.helpers.Notch import *
+from parametricBox.helpers.Notch import *
 
-from parametrizedBox.WithJoints import *
-from parametrizedBox.PlainBox import *
+from parametricBox.WithJoints import *
+from parametricBox.PlainBox import *
 
 _ = 1
 

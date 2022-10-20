@@ -1,6 +1,6 @@
 from solid import *
 
-from parametrizedBox.helpers.Measured import *
+from parametricBox.helpers.Measured import *
 
 class Round(Measured):
     def __init__(self, diameter: float,  depth: float, segments: int):

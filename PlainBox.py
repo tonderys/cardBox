@@ -1,10 +1,10 @@
-from parametrizedBox.Box import *
+from parametricBox.Box import *
 
-from parametrizedBox.helpers.Chamfer import *
-from parametrizedBox.helpers.PrinterConstants import *
+from parametricBox.helpers.Chamfer import *
+from parametricBox.helpers.PrinterConstants import *
 
-from parametrizedBox.interior.Interior import *
-from parametrizedBox.interior.Cube import *
+from parametricBox.interior.Interior import *
+from parametricBox.interior.Cube import *
 
 class PlainBox(Box):
     def __init__(self, inner: Interior):
@@ -47,6 +47,6 @@ class PlainBox(Box):
         return difference()(outer, inner, roof)
 
 if __name__ == '__main__':
-    from parametrizedBox.interior.Cube import *
+    from parametricBox.interior.Cube import *
     obj = PlainBox(Cube(26, 105, 31))
     scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")

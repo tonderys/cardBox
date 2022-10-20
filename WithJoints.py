@@ -1,8 +1,8 @@
 from numpy import *
 
-from parametrizedBox.helpers.Fillet import *
-from parametrizedBox.helpers.Notch import *
-from parametrizedBox.PlainBox import *
+from parametricBox.helpers.Fillet import *
+from parametricBox.helpers.Notch import *
+from parametricBox.PlainBox import *
 
 class WithJoints(Box):
     def __init__(self, box: Box):

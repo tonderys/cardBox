@@ -1,9 +1,9 @@
 from solid import *
 from solid.utils import *
 
-from parametrizedBox.helpers.Chamfer import *
+from parametricBox.helpers.Chamfer import *
 
-from parametrizedBox.interior.Interior import *
+from parametricBox.interior.Interior import *
 
 class Cube(Interior):
     def __init__(self, width: float, height: float, depth: float):

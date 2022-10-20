@@ -1,6 +1,6 @@
 import unittest
 
-from parametrizedBox.Builder import *
+from parametricBox.Builder import *
 
 class Builder_tests(unittest.TestCase):
     def test_get_filename_with_no_args(self):

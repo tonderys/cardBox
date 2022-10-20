@@ -2,7 +2,7 @@ from numpy import *
 from solid import *
 from solid.utils import *
 
-from parametrizedBox.interior.Interior import *
+from parametricBox.interior.Interior import *
 
 class Bowl(Interior):
     def __init__(self, width: float, height: float, depth:float):

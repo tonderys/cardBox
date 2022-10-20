@@ -1,21 +1,12 @@
 from solid import *
 from solid.utils import *
 
-class Interior:
+from parametricBox.helpers.Measured import *
+
+class Interior(Measured):
     def __init__(self, name: str, width: float, height: float, depth: float):
         self.name = name
-        self.width = width
-        self.height = height
-        self.depth = depth
-
-    def get_width(self):
-        return self.width
-
-    def get_height(self):
-        return self.height
-
-    def get_depth(self):
-        return self.depth
+        Measured.__init__(self, width, height, depth)
 
     def get_boundaries(self) -> OpenSCADObject:
         return cube([self.width, self.height, self.depth])

@@ -1,17 +1,18 @@
 from enum import Enum
 
-from parametrizedBox.helpers.Fillet import *
+from parametricBox.helpers.Fillet import *
 
-from parametrizedBox.interior.Bowl import *
-from parametrizedBox.interior.Cube import *
-from parametrizedBox.interior.Pipe import *
-from parametrizedBox.interior.SeparateTokensHolder import *
+from parametricBox.interior.Bowl import *
+from parametricBox.interior.Cube import *
+from parametricBox.interior.Pipe import *
+from parametricBox.interior.SeparateTokensHolder import *
+from parametricBox.interior.VariousTokensHolder import *
 
-from parametrizedBox.PlainBox import *
-from parametrizedBox.WithHorizontalHole import *
-from parametrizedBox.WithJoints import *
-from parametrizedBox.WithRoundedCorners import *
-from parametrizedBox.WithVerticalHoles import *
+from parametricBox.PlainBox import *
+from parametricBox.WithHorizontalHole import *
+from parametricBox.WithJoints import *
+from parametricBox.WithRoundedCorners import *
+from parametricBox.WithVerticalHoles import *
 
 path = "f:\\Druk3D\\STL\\openSCAD\\"
 
@@ -20,9 +21,13 @@ class Type(Enum):
     HORIZONTAL_CARD_HOLDER = 2
     VERTICAL_CARD_HOLDER = 3
     HORIZONTAL_COIN_HOLDER = 4
+    VARIOUS_TOKENS_HOLDER = 5
 
 def get_filename(name: str, type: Type, *args):
-    arguments = "x".join(str(arg) for arg in args)
+    if isinstance(args[0], List):
+        arguments = "x".join(str(arg) for arg in args[1:])
+    else:
+        arguments = "x".join(str(arg) for arg in args)
     typename = str(type).split('.')[1].lower()
     return f"{path}{name}_{typename}_{arguments}mm.scad"
 
@@ -39,6 +44,9 @@ def get_object(type: Type, *args):
                 obj = WithHorizontalHole(WithJoints(PlainBox(SeparateTokensHolder(*args))))
             else:
                 obj = WithHorizontalHole(WithJoints(PlainBox(Pipe(*args))))
+        case Type.VARIOUS_TOKENS_HOLDER:
+            obj = WithHorizontalHole(WithJoints(PlainBox(VariousTokensHolder(*args))))
+
     return WithRoundedCorners(obj)
 
 def build(name: str, type: Type, *args):

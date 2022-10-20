@@ -1,10 +1,10 @@
 from solid import *
 from solid.utils import *
 
-from parametrizedBox.Box import *
+from parametricBox.Box import *
 
-from parametrizedBox.helpers.Fillet import *
-from parametrizedBox.helpers.PrinterConstants import *
+from parametricBox.helpers.Fillet import *
+from parametricBox.helpers.PrinterConstants import *
 
 class WithHorizontalHole(Box):
     def __init__(self, box: Box):
@@ -33,8 +33,8 @@ class WithHorizontalHole(Box):
         return self.bottom
 
 if __name__ == '__main__':
-    from parametrizedBox.PlainBox import *
-    from parametrizedBox.WithJoints import *
+    from parametricBox.PlainBox import *
+    from parametricBox.WithJoints import *
 
     obj = WithHorizontalHole(WithJoints(PlainBox(Cube(100, 20, 30))))
     scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")

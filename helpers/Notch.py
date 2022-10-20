@@ -1,5 +1,5 @@
 from solid import *
-from parametrizedBox.helpers.PrinterConstants import *
+from parametricBox.helpers.PrinterConstants import *
 class Notch:
     def __init__(self, height: float):
         self.a = 6

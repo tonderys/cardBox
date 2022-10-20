@@ -1,9 +1,9 @@
 from solid import *
 from solid.utils import *
 
-from parametrizedBox.helpers.Chamfer import *
+from parametricBox.helpers.Chamfer import *
 
-from parametrizedBox.interior.Interior import *
+from parametricBox.interior.Interior import *
 
 class Pipe(Interior):
     def get_roof(self, depth) -> OpenSCADObject:

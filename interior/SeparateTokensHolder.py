@@ -1,12 +1,12 @@
 from solid import *
 from solid.utils import *
 
-from parametrizedBox.helpers.Chamfer import *
-from parametrizedBox.helpers.PrinterConstants import *
+from parametricBox.helpers.Chamfer import *
+from parametricBox.helpers.PrinterConstants import *
 
-from parametrizedBox.stored_objects.Round import *
+from parametricBox.stored_objects.Round import *
 
-from parametrizedBox.interior.Interior import *
+from parametricBox.interior.Interior import *
 
 class SeparateTokensHolder(Interior):
     def get_roof(self, depth) -> OpenSCADObject:

@@ -1,10 +1,10 @@
 from solid import *
 from solid.utils import *
 
-from parametrizedBox.interior.Pipe import *
-from parametrizedBox.PlainBox import *
-from parametrizedBox.WithJoints import *
-from parametrizedBox.WithHorizontalHole import *
+from parametricBox.interior.Pipe import *
+from parametricBox.PlainBox import *
+from parametricBox.WithJoints import *
+from parametricBox.WithHorizontalHole import *
 
 def get_holes(obj: Box, diameter: float) -> OpenSCADObject:
     diameter = min(0.4 * obj.get_width(), diameter)
