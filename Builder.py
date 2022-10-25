@@ -24,12 +24,8 @@ class Type(Enum):
     VARIOUS_TOKENS_HOLDER = 5
 
 def get_filename(name: str, type: Type, *args):
-    if isinstance(args[0], List):
-        arguments = "x".join(str(arg) for arg in args[1:])
-    else:
-        arguments = "x".join(str(arg) for arg in args)
     typename = str(type).split('.')[1].lower()
-    return f"{path}{name}_{typename}_{arguments}mm.scad"
+    return f"{path}{name}_{typename}.scad"
 
 def get_object(type: Type, *args):
     match type:
