@@ -3,9 +3,7 @@ from solid.utils import *
 
 from parametricBox.Builder import *
 
-from parametricBox.stored_objects.Round import *
-from parametricBox.stored_objects.Rectangle import *
-
+from parametricBox.interior.Cube import *
 path = "f:\Druk3D\STL\openSCAD\\"
 
 def main():
@@ -29,13 +27,13 @@ def main():
     # build("Smallworld_Mountains deck", Type.VERTICAL_CARD_HOLDER, 50, 20, 41)
     # build("Smallworld_Forts deck", Type.VERTICAL_CARD_HOLDER, 38, 12, 38)
     # build("Smallworld_Camps deck", Type.HORIZONTAL_COIN_HOLDER, Round(40,2,10), 5, 37, 0.0)
-    build("Smallworld_Various tiles", Type.VARIOUS_TOKENS_HOLDER, [Rectangle(31,31,6.5),
-                                                                   Rectangle(31,31,6.5),
-                                                                   Rectangle(27, 27, 8),
-                                                                   Rectangle(27, 27, 4.5),
-                                                                   Rectangle(27, 27, 2.5),
-                                                                   Rectangle(27, 27, 2.5),
-                                                                   Rectangle(27, 27, 2.5),
-                                                                   Rectangle(27, 27, 2.5)], 31, 1.0)
+    build("Smallworld_Various tiles", Type.VARIOUS_TOKENS_HOLDER, [Cube(31, 6.5, 31),
+                                                                   Cube(31,6.5, 31),
+                                                                   Cube(27, 8, 27),
+                                                                   Cube(27, 4.5, 27),
+                                                                   Cube(27, 2.5, 27),
+                                                                   Cube(27, 2.5, 27),
+                                                                   Cube(27, 2.5, 27),
+                                                                   Cube(27, 2.5, 27)], 31, 1.0)
 
 main()
