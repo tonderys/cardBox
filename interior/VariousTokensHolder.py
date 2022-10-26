@@ -37,7 +37,6 @@ from parametricBox.interior.Pipe import *
 from parametricBox.interior.Cube import *
 if __name__ == '__main__':
     obj = VariousTokensHolder([Cube(31,31,6.5),
-                               Cube(31,31,6.5),
                                Cube(27, 27, 8),
                                Cube(27, 27, 4.5),
                                Cube(27, 27, 2.5),

@@ -4,26 +4,14 @@ from solid.utils import *
 from parametricBox.helpers.Chamfer import *
 from parametricBox.helpers.PrinterConstants import *
 
-from parametricBox.stored_objects.Round import *
+from parametricBox.interior.Pipe import *
 
-from parametricBox.interior.Interior import *
+from parametricBox.interior.VariousTokensHolder import *
 
-class SeparateTokensHolder(Interior):
-    def get_roof(self, depth) -> OpenSCADObject:
-        return  chamfer(self)
-
+class SeparateTokensHolder(VariousTokensHolder):
     def __init__(self, token: Measured, amount: int, depth: float, separator: float = nozzle_diameter):
-        height = (token.get_depth() + separator)
-        Interior.__init__(self, "Separate Tokens Holder", token.get_width(), height * amount, depth)
-
-        path = forward(token.get_height() / 2)(cube([token.get_width(), token.get_height() / 2, token.get_depth()]))
-        high_token = union()(token.scad(), path)
-        tokens = forward(height * amount)(
-                    rot_z_to_neg_y(
-                        union()(
-                            [up(height * i)(high_token) for i in range(amount)])))
-        self.body = tokens
+        VariousTokensHolder.__init__(self, [token for _ in range(amount)], depth, separator)
 
 if __name__ == '__main__':
-    obj = SeparateTokensHolder(Round(23,2,16),3,23)
+    obj = SeparateTokensHolder(Pipe(23,2,16),3,23)
     scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")
