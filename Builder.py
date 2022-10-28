@@ -1,6 +1,7 @@
 from enum import Enum
 
 from parametricBox.helpers.Fillet import *
+from parametricBox.helpers.BoxBuilder import *
 
 from parametricBox.interior.Bowl import *
 from parametricBox.interior.Cube import *
@@ -20,35 +21,27 @@ class Type(Enum):
     BOWL = 1
     HORIZONTAL_CARD_HOLDER = 2
     VERTICAL_CARD_HOLDER = 3
-    HORIZONTAL_COIN_HOLDER = 4
-    VARIOUS_TOKENS_HOLDER = 5
+    VARIOUS_TOKENS_HOLDER = 4
 
 def get_filename(name: str, type: Type, *args):
     typename = str(type).split('.')[1].lower()
     return f"{path}{name}_{typename}.scad"
 
-def get_object(type: Type, *args):
+def get_object(type: Type, name, *args):
+    filename = get_filename(name, type, args)
     match type:
         case Type.BOWL:
-            obj = WithJoints(PlainBox(Bowl(*args)))
+            obj = BoxBuilder(PlainBox(Bowl(*args)), filename).withJoints()
         case Type.HORIZONTAL_CARD_HOLDER:
-            obj = WithVerticalHoles(WithJoints(PlainBox(Cube(*args))))
+            obj = BoxBuilder(PlainBox(Cube(*args)), filename).withJoints().withVerticalHoles()
         case Type.VERTICAL_CARD_HOLDER:
-            obj = WithHorizontalHole(WithJoints(PlainBox(Cube(*args))))
-        case Type.HORIZONTAL_COIN_HOLDER:
-            if isinstance(args[0], Measured):
-                obj = WithHorizontalHole(WithJoints(PlainBox(SeparateTokensHolder(*args))))
-            else:
-                obj = WithHorizontalHole(WithJoints(PlainBox(Pipe(*args))))
+            obj = BoxBuilder(PlainBox(Cube(*args)), filename).withJoints().withHorizontalHole()
         case Type.VARIOUS_TOKENS_HOLDER:
-            obj = WithHorizontalHole(WithJoints(PlainBox(VariousTokensHolder(*args))))
-
-    return WithRoundedCorners(obj)
+            obj = BoxBuilder(PlainBox(VariousTokensHolder(*args)), filename).withJoints().withHorizontalHole()
+    return obj
 
 def build(name: str, type: Type, *args):
-    obj = get_object(type, *args)
-    print(f"{name}\n{type}{args}:\n{obj.log()}\n")
-    scad_render_to_file(obj.scad(), get_filename(name, type, *args))
+    get_object(type, name, *args).build()
 
 if __name__ == '__main__':
-    build("test", Type.HORIZONTAL_CARD_HOLDER, 23, 29, 23)
+    build("test", Type.VARIOUS_TOKENS_HOLDER, [Pipe(23,23,23), Cube(23,23,23)], 23)
