@@ -24,15 +24,18 @@ def rot_z(object: Measured):
     object.body = rotate(a=angle, v=[0,0,1])(object.body)
     exchange_width_and_height(object)
     move_back(object)
+    return object
 
 def rot_y(object: Measured):
     move_to_middle(object)
     object.body = rotate(a=angle, v=[0,1,0])(object.body)
     exchange_depth_and_width(object)
     move_back(object)
+    return object
 
 def rot_x(object: Measured):
     move_to_middle(object)
     object.body = rotate(a=angle, v=[1,0,0])(object.body)
     exchange_depth_and_height(object)
     move_back(object)
+    return object

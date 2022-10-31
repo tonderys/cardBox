@@ -36,11 +36,7 @@ from parametricBox.interior.Bowl import *
 from parametricBox.interior.Pipe import *
 from parametricBox.interior.Cube import *
 if __name__ == '__main__':
-    obj = VariousTokensHolder([Cube(31,31,6.5),
-                               Cube(27, 27, 8),
-                               Cube(27, 27, 4.5),
-                               Cube(27, 27, 2.5),
-                               Cube(27, 27, 2.5),
-                               Cube(27, 27, 2.5),
-                               Cube(27, 27, 2.5)],23)
+    obj = VariousTokensHolder([Cube(22,22,22),
+                               Bowl(27, 27, 15),
+                               Pipe(27, 27, 23)],15)
     scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")
