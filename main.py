@@ -2,6 +2,7 @@ from solid import *
 from solid.utils import *
 
 from parametricBox.helpers.BoxBuilder import *
+from parametricBox.helpers.roof import *
 
 from parametricBox.interior.Bowl import *
 from parametricBox.interior.Cube import *
@@ -25,10 +26,10 @@ def main():
     BoxBuilder(inner, filename).withJoints().build()
 
     filename, inner = get_filename("Keep the heroes out chests"), Cube(30, 36, 25)
-    BoxBuilder(inner, filename).withJoints().withHorizontalHole().build()
+    BoxBuilder(inner, filename).withRoof(chamfer).withJoints().withHorizontalHole().build()
 
     filename, inner = get_filename("Keep the heroes out round tokens"), VariousTokensHolder([Pipe(26,22,25), Pipe(26,12,25)], 25, 3)
-    BoxBuilder(inner, filename).withJoints().withHorizontalHole().build()
+    BoxBuilder(inner, filename).withRoof(chamfer).withJoints().withHorizontalHole().build()
 
     filename, inner = get_filename("Keep the heroes out wound"), Bowl(48, 39, 25)
     BoxBuilder(inner, filename).withJoints().build()

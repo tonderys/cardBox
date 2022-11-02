@@ -1,7 +1,6 @@
 from solid import *
 from solid.utils import *
 
-from parametricBox.helpers.Chamfer import *
 from parametricBox.helpers.PrinterConstants import *
 
 from parametricBox.interior.Pipe import *

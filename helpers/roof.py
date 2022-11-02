@@ -1,9 +1,9 @@
 from solid import *
+from solid.utils import *
 
-from parametricBox.interior.Interior import *
+from parametricBox.helpers.Measured import *
 
-def chamfer(box: Interior) -> OpenSCADObject:
-    chamfer_depth = 2
+def chamfer(box: Measured, chamfer_depth: float = 2.0) -> OpenSCADObject:
     return polyhedron(points=[[0, 0, box.depth - chamfer_depth],
                               [0, box.height, box.depth - chamfer_depth],
                               [box.width, box.height, box.depth - chamfer_depth],
@@ -18,3 +18,7 @@ def chamfer(box: Interior) -> OpenSCADObject:
                              [6, 7, 3, 2],
                              [7, 4, 0, 3],
                              [7, 6, 5, 4]])
+
+def regular(box: Measured, chamfer_depth: float = 2.0) -> OpenSCADObject:
+    roof = up(box.depth - chamfer_depth)(cube([box.width, box.height, chamfer_depth]))
+    return intersection()(roof, box.scad())

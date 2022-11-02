@@ -1,7 +1,6 @@
 from solid import *
 from solid.utils import *
 
-from parametricBox.helpers.Chamfer import *
 from parametricBox.helpers.PrinterConstants import *
 
 from parametricBox.interior.Interior import *
@@ -16,9 +15,6 @@ def get_sum_height(tokens, separator):
     return sum([token.get_height() for token in tokens]) + (len(tokens) - 1) * separator
 
 class VariousTokensHolder(Interior):
-    def get_roof(self, depth) -> OpenSCADObject:
-        return  chamfer(self)
-
     def __init__(self, tokens, depth: float, separator: float = nozzle_diameter):
         max_width = get_max_width(tokens)
         max_depth = get_max_depth(tokens)

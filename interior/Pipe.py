@@ -1,14 +1,11 @@
 from solid import *
 from solid.utils import *
 
-from parametricBox.helpers.Chamfer import *
+from parametricBox.helpers.roof import *
 
 from parametricBox.interior.Interior import *
 
 class Pipe(Interior):
-    def get_roof(self, depth) -> OpenSCADObject:
-        return  chamfer(self)
-
     def __init__(self, diameter, height, depth):
         Interior.__init__(self, "Pipe", diameter, height, depth)
 

@@ -1,18 +1,19 @@
 from parametricBox.Box import *
 
-from parametricBox.helpers.Chamfer import *
+from parametricBox.helpers.roof import *
 from parametricBox.helpers.PrinterConstants import *
 
 from parametricBox.interior.Interior import *
 from parametricBox.interior.Cube import *
 
 class PlainBox(Box):
-    def __init__(self, inner: Interior):
+    def __init__(self, inner: Interior, get_roof = regular):
         self.floor_thickness = min_floor_thickness
         self.roof_thickness = min_floor_thickness
         self.x_wall_thickness = min_wall_thickness
         self.y_wall_thickness = min_wall_thickness
         self.box = inner
+        self.get_roof = get_roof
 
     def get_width(self) -> float:
         return self.box.get_width() + (2 * self.x_wall_thickness)
@@ -42,11 +43,11 @@ class PlainBox(Box):
                            self.floor_thickness))(self.box.scad())
         roof = translate([self.x_wall_thickness,
                           self.y_wall_thickness,
-                          self.roof_thickness + self.floor_thickness])(self.box.get_roof(self.roof_thickness))
+                          self.roof_thickness + self.floor_thickness])(self.get_roof(self.box, self.roof_thickness))
 
         return difference()(outer, inner, roof)
 
 if __name__ == '__main__':
     from parametricBox.interior.Cube import *
-    obj = PlainBox(Cube(26, 105, 31))
+    obj = PlainBox(Cube(26, 105, 31), regular)
     scad_render_to_file(obj.scad(), f"f:\\Druk3D\\STL\\openSCAD\\test.scad")

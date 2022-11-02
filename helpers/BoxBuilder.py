@@ -14,6 +14,10 @@ class BoxBuilder:
         self.object = PlainBox(inner)
         self.filename = filename
 
+    def withRoof(self, roof):
+        self.object.get_roof = roof
+        return self
+
     def withJoints(self):
         self.object = WithJoints(self.object)
         self.log = self.object.log() + "\n"
