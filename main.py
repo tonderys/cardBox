@@ -2,7 +2,7 @@ from solid import *
 from solid.utils import *
 
 from parametricBox.helpers.BoxBuilder import *
-from parametricBox.helpers.roof import *
+from parametricBox.helpers.Roof import *
 
 from parametricBox.interior.Bowl import *
 from parametricBox.interior.Cube import *
@@ -33,5 +33,8 @@ def main():
 
     filename, inner = get_filename("Keep the heroes out wound"), Bowl(48, 39, 25)
     BoxBuilder(inner, filename).withJoints().build()
+
+    filename, inner = get_filename("Battle Chips deck"), Cube(66.5,91, 69)
+    BoxBuilder(inner, filename).withJoints().withVerticalHoles().build()
 
 main()

@@ -3,10 +3,10 @@ from solid import *
 from parametricBox.helpers.Measured import *
 
 def move_to_middle(object):
-    object.body = translate([-object.get_width() / 2, -object.get_height() / 2, -object.get_depth() / 2])(object.body)
+    object.body = translate([-object.width / 2, -object.height / 2, -object.depth / 2])(object.body)
 
 def move_back(object):
-    object.body = translate([object.get_width() / 2, object.get_height() / 2, object.get_depth() / 2])(object.body)
+    object.body = translate([object.width / 2, object.height / 2, object.depth / 2])(object.body)
 
 def exchange_width_and_height(object):
     object.width, object.height = object.height, object.width

@@ -1,9 +1,7 @@
-import parametricBox.helpers.roof
 from solid import *
 from solid.utils import *
 
 from parametricBox.helpers.Measured import *
-from parametricBox.helpers.roof import *
 
 class Interior(Measured):
     def __init__(self, name: str, width: float, height: float, depth: float):

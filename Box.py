@@ -1,12 +1,8 @@
-class Box():
-    def get_width(self) -> float:
-        return self.box.get_width()
+from parametricBox.helpers.Measured import *
 
-    def get_height(self) -> float:
-        return self.box.get_height()
-
-    def get_depth(self) -> float:
-        return self.box.get_depth()
+class Box(Measured):
+    def __init__(self, width, height, depth):
+        Measured.__init__(self, width, height, depth)
 
     def get_wall_x(self) -> float:
         return self.box.get_wall_x()
@@ -20,7 +16,7 @@ class Box():
     def log(self) -> str:
         return self.box.log() + "\n" + \
                f"created {type(self).__name__} " + \
-               f"with dimensions {self.get_width()}(w) x {self.get_height()}(h) x {self.get_depth()}(d) " + \
+               f"with dimensions {self.width}(w) x {self.height}(h) x {self.depth}(d) " + \
                f"and walls {self.get_wall_x()}(x) {self.get_wall_y()}(y) {self.get_floor()}(floor)"
 
     def scad(self):

@@ -1,0 +1,66 @@
+A python generator for creating modular box in openSCAD
+
+Created mostly for organizers for board games, but can be used elsewhere just as successfully.
+
+overview of the classes hierarchy:
+
+<div hidden>
+```
+@startuml class_hierarchy
+class Measured{
+    +width
+    +height
+    +depth
+    +get_width()
+    +get_height()
+    +get_depth()
+}
+
+class Interior{
+    +get_boundaries()
+    +log()
+    +scad()
+}
+Interior-up-|>Measured
+
+Column-up-|>Interior
+Bowl-up-|>Interior
+SeparateTokensHolder-up--|>Interior
+Cube-up-|>Interior
+VariousTokensHolder-up--|>Interior
+Pipe-up-|>Interior
+
+class Box{
+    +get_wall_x()
+    +get_wall_y()
+    +get_floor()
+    +log()
+    +scad()
+}
+Box -up-|>Measured
+class BoxBuilder{
+    +withRoof(roof)
+    +withJoints()
+    +withVerticalHoles()
+    +withHorizontalHole()
+    +build()
+}
+
+PlainBox-up-|> Box
+WithHorizontalHole-up--|>Box
+WithJoints-up-|> Box
+WithVerticalHoles-up--|>Box
+WithRoundedCorners-up-|>Box
+
+WithJoints-down->Notch
+WithRoundedCorners-down->Fillet
+Fillet->Box
+
+BoxBuilder-right->Box
+
+@enduml
+```
+</div>
+
+![](class_hierarchy.svg)
+

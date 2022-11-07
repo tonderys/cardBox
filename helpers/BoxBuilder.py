@@ -2,6 +2,7 @@ from solid import *
 
 from parametricBox.interior.Interior import *
 
+from parametricBox.PlainBox import *
 from parametricBox.WithJoints import *
 from parametricBox.WithVerticalHoles import *
 from parametricBox.WithHorizontalHole import *

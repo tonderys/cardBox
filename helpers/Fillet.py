@@ -7,13 +7,13 @@ def get_all_combinations(delta_x, delta_y, delta_z, obj: Box, offset: float= 0):
     return [[[translate([offset + x, offset + y, offset + z])(obj) for x in delta_x] for y in delta_y] for z in delta_z]
 
 def get_excess(obj: Box, r: float):
-    height = obj.get_height() - r
-    width = obj.get_width() - r
-    depth = obj.get_depth() - r
+    height = obj.height - r
+    width = obj.width - r
+    depth = obj.depth - r
 
-    cube_x = cube([obj.get_width(),r,r])
-    cube_y = cube([r,obj.get_height(),r])
-    cube_z = cube([r,r,obj.get_depth()])
+    cube_x = cube([obj.width,r,r])
+    cube_y = cube([r,obj.height,r])
+    cube_z = cube([r,r,obj.depth])
 
     return (get_all_combinations(delta_x = [0], delta_y = [0, height], delta_z = [0, depth], obj = cube_x) +
             get_all_combinations(delta_x = [0, width], delta_y = [0], delta_z = [0, depth], obj = cube_y) +
@@ -22,9 +22,9 @@ def get_excess(obj: Box, r: float):
 def get_trimmed_corners(obj: Box, r: float):
     segments = 20
 
-    height = obj.get_height() - (2 * r)
-    width = obj.get_width() - (2 * r)
-    depth = obj.get_depth() - (2 * r)
+    height = obj.height - (2 * r)
+    width = obj.width - (2 * r)
+    depth = obj.depth - (2 * r)
 
     corner = sphere(r=r, segments=segments)
     column_z = cylinder(r=r, h=depth, segments=segments)

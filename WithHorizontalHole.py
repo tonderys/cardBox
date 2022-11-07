@@ -3,15 +3,15 @@ from solid.utils import *
 
 from parametricBox.Box import *
 
-from parametricBox.helpers.Fillet import *
 from parametricBox.helpers.PrinterConstants import *
 
 class WithHorizontalHole(Box):
     def __init__(self, box: Box):
         self.box = box
+        Box.__init__(self, self.box.width, self.box.height, self.box.depth)
 
-    def _get_diameter(self):
-        card_width = self.box.get_width() - (self.box.get_wall_x() * 2)
+    def _get_diameter(self) -> float:
+        card_width = self.box.width - (self.box.get_wall_x() * 2)
         return min(0.8 * card_width, finger_diameter)
 
     def log(self) -> str:
@@ -19,15 +19,15 @@ class WithHorizontalHole(Box):
 
     def scad(self) -> OpenSCADObject:
         diameter = self._get_diameter()
-        hole = rot_z_to_y(cylinder(d=diameter, h=self.box.get_height()))
+        hole = rot_z_to_y(cylinder(d=diameter, h=self.box.height))
         hole = union()(hole,
                        left(diameter / 2)(
                            cube([diameter,
-                                 self.box.get_height(),
-                                 self.box.get_depth() / 2])))
-        hole = translate([self.box.get_width() / 2,
-                          0,
-                          self.box.get_depth() - (diameter / 2)])(hole)
+                                 self.box.height,
+                                 self.box.depth / 2])))
+        hole = translate([self.box.width / 2,
+                          0.0,
+                          self.box.depth - (diameter / 2)])(hole)
 
         self.bottom = difference()(self.box.scad(), hole)
         return self.bottom

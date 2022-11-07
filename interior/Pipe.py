@@ -1,8 +1,6 @@
 from solid import *
 from solid.utils import *
 
-from parametricBox.helpers.roof import *
-
 from parametricBox.interior.Interior import *
 
 class Pipe(Interior):
