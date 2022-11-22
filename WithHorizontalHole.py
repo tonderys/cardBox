@@ -25,7 +25,7 @@ class WithHorizontalHole(Box):
                        left(diameter / 2)(
                            cube([diameter,
                                  self.box.height,
-                                 self.box.depth / 2])))
+                                 self.box.depth])))
         hole = translate([self.box.width / 2,
                           0.0,
                           self.box.depth + (diameter / 2) - self.hole_height])(hole)

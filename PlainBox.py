@@ -46,7 +46,7 @@ class PlainBox(Box):
                            self.floor_thickness))(self.box.scad())
         roof = translate([self.x_wall_thickness,
                           self.y_wall_thickness,
-                          self.roof_thickness + self.floor_thickness])(self.get_roof(self.box, self.roof_thickness))
+                          self.roof_thickness + self.floor_thickness])(self.get_roof(self.box, min_wall_thickness))
 
         return difference()(outer, inner, roof)
 
