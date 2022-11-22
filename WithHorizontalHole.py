@@ -6,8 +6,9 @@ from parametricBox.Box import *
 from parametricBox.helpers.PrinterConstants import *
 
 class WithHorizontalHole(Box):
-    def __init__(self, box: Box):
+    def __init__(self, box: Box, hole_height: float = 0.0):
         self.box = box
+        self.hole_height = hole_height if hole_height else self._get_diameter()
         Box.__init__(self, self.box.width, self.box.height, self.box.depth)
 
     def _get_diameter(self) -> float:
@@ -27,7 +28,7 @@ class WithHorizontalHole(Box):
                                  self.box.depth / 2])))
         hole = translate([self.box.width / 2,
                           0.0,
-                          self.box.depth - (diameter / 2)])(hole)
+                          self.box.depth + (diameter / 2) - self.hole_height])(hole)
 
         self.bottom = difference()(self.box.scad(), hole)
         return self.bottom

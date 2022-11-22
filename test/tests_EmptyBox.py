@@ -19,9 +19,9 @@ class EmptyBox_tests(unittest.TestCase):
 
     def test_basic_empty_box_has_outer_diameters_enlarged_by_minimal_wall_thickness_on_each_side(self):
         sut = PlainBox(Cube(10, 20, 30))
-        self.assertEqual(sut.get_width(), 10 + walls)
-        self.assertEqual(sut.get_height(), 20 + walls)
-        self.assertEqual(sut.get_depth(), 30 + floors)
+        self.assertEqual(sut.width, 10 + walls)
+        self.assertEqual(sut.height, 20 + walls)
+        self.assertEqual(sut.depth, 30 + floors)
 
     def test_basic_empty_box_has_inner_diameters_as_requested(self):
         sut = PlainBox(Cube(10, 20, 30))

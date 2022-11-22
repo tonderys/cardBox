@@ -27,14 +27,12 @@ class WithJoints(Box):
 
     def _get_upper_joints(self):
         delta = self._get_delta(self.width)
-        print(f"increased width by {delta}")
         self.width += delta
         joints = self._get_joints(self.width)
         return forward(self.height)(joints)
 
     def _get_right_joints(self):
-        delta = self._get_delta(self.width)
-        print(f"increased height by {delta}")
+        delta = self._get_delta(self.height)
         self.height += delta
         joints = self._get_joints(self.height)
         joints = rotate([0, 0, -90])(joints)
@@ -42,15 +40,13 @@ class WithJoints(Box):
 
     def _get_lower_joints(self):
         delta = self._get_delta(self.width)
-        print(f"increased width by {delta}")
         self.width += delta
         joints = self._get_joints(self.width)
         joints = rotate([0, 0, 180])(joints)
         return right(self.width)(joints)
 
     def _get_left_joints(self):
-        delta = self._get_delta(self.width)
-        print(f"increased height by {delta}")
+        delta = self._get_delta(self.height)
         self.height += delta
         joints = self._get_joints(self.height)
         return rotate([0, 0, 90])(joints)

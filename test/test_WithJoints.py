@@ -21,8 +21,8 @@ class WithJoints_tests(unittest.TestCase):
     def test_enlarging_the_box_to_a_minimum_value(self):
         box = PlainBox(Cube(1,1,1))
         sut = WithJoints(box)
-        self.assertEqual(sut.get_width(), self.minimal_dimension)
-        self.assertEqual(sut.get_height(), self.minimal_dimension)
+        self.assertEqual(sut.width, self.minimal_dimension)
+        self.assertEqual(sut.height, self.minimal_dimension)
 
     def test_ideal_minimal_box_without_enlarging(self):
         max_input_dimension = self.minimal_case - self.minimal_walls
@@ -31,8 +31,8 @@ class WithJoints_tests(unittest.TestCase):
         self.assertEqual(self.minimal_dimension, 10.5)
 
         sut = WithJoints(PlainBox(Cube(max_input_dimension, max_input_dimension, _)))
-        self.assertEqual(sut.get_width(), self.minimal_dimension)
-        self.assertEqual(sut.get_height(), self.minimal_dimension)
+        self.assertEqual(sut.width, self.minimal_dimension)
+        self.assertEqual(sut.height, self.minimal_dimension)
 
     def test_not_enlarging_big_box(self):
         width = 36 - self.minimal_walls - self.notch.delta
@@ -42,10 +42,18 @@ class WithJoints_tests(unittest.TestCase):
         self.assertEqual(height, 39.5)
 
         sut = WithJoints(PlainBox(Cube(width,height,_)))
-        self.assertEqual(sut.get_width(),  37.5)
-        self.assertEqual(sut.get_height(), 46.5)
+        self.assertEqual(sut.width,  37.5)
+        self.assertEqual(sut.height, 46.5)
 
     def test_enlarging_big_box(self):
-        sut = WithJoints(PlainBox(Cube(31,40,_)))
-        self.assertEqual(sut.get_width(),  46.5)
-        self.assertEqual(sut.get_height(), 55.5)
+        sut = Cube(31,40,_)
+        self.assertEqual(31, sut.width)
+        self.assertEqual(40, sut.height)
+
+        sut = PlainBox(sut)
+        self.assertEqual(35, sut.width)
+        self.assertEqual(44, sut.height)
+
+        sut = WithJoints(sut)
+        self.assertEqual(46.5, sut.width)
+        self.assertEqual(55.5, sut.height)

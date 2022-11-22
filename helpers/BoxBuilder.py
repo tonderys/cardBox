@@ -13,6 +13,7 @@ separator = "\n---------------------------------------------------------\n"
 class BoxBuilder:
     def __init__(self, inner: Interior, filename):
         self.object = PlainBox(inner)
+        self.log = self.object.log() + "\n"
         self.filename = filename
 
     def withRoof(self, roof):
@@ -29,8 +30,8 @@ class BoxBuilder:
         self.log = self.object.log() + "\n"
         return self
 
-    def withHorizontalHole(self):
-        self.object = WithHorizontalHole(self.object)
+    def withHorizontalHole(self, hole_height: float = 0.0):
+        self.object = WithHorizontalHole(self.object, hole_height)
         self.log = self.object.log() + "\n"
         return self
 
