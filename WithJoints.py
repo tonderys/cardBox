@@ -12,8 +12,8 @@ class WithJoints(Box):
         Box.__init__(self, self.box.width,
                            self.box.height,
                            self.box.depth)
-        joints = [self._get_upper_joints(), self._get_right_joints(),
-                  self._get_lower_joints(), self._get_left_joints()]
+        joints = [self._get_left_joints(), self._get_lower_joints(),
+                  self._get_upper_joints(), self._get_right_joints()]
         body = union()(self._move_by_delta()(self.box.scad()), self._get_case(), joints)
 
         self.width += 2 * self._notch.h
